@@ -8,8 +8,7 @@ const Login = async () => {
   if (user.data.user) {
     return redirect("/dashboard");
   }
-  const { data:username } = await supabase.from("profiles").select("username");
-  console.log(username)
+  const { data: username } = await supabase.from("profiles").select("username");
 
   return (
     <div className="h-full">

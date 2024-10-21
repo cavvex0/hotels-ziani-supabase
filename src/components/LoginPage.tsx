@@ -1,20 +1,20 @@
 "use client";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/src/components/ui/button";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+} from "@/src/components/ui/card";
+import { Input } from "@/src/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/src/components/ui/select";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { signInAction, signUpAction } from "../actions/authActions";
@@ -38,7 +38,7 @@ const LoginPage = ({ username }: { username: any }) => {
     mutationKey: ["sign_UP"],
     mutationFn: signInAction,
     onSuccess: () => {
-      form.reset();
+      form.setValue("password", "");
     },
   });
 

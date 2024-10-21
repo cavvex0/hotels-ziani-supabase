@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import DashPage from "@/src/components/DashPage";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
