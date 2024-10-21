@@ -11,8 +11,15 @@ import BainSelector from "./BainSelector";
 import { useMutation } from "@tanstack/react-query";
 import { createSoin } from "../actions/createSoin";
 import { getUsername } from "@/lib/getUserClient";
+import { HotelsComboBox } from "./HotelsComboBox";
+import { HotelSchemaType } from "../schema/hotelSchema";
 
-const AddSoin = () => {
+type Props = {
+  hotelsData: HotelSchemaType[];
+};
+
+const AddSoin = ({ hotelsData }: Props) => {
+  const [selectedHotel, setSelectedHotel] = useState('');
   const [isTaxiPaid, setIsTaxiPaid] = useState(false);
   const [user, setUser] = useState("");
 
@@ -64,6 +71,16 @@ const AddSoin = () => {
   const { mutate } = useMutation({
     mutationKey: ["create_Soin"],
     mutationFn: createSoin,
+
+    onSuccess: () => {
+      form.reset();
+      setBain({
+        salam: 0,
+        istanbul: 0,
+        orient: 0,
+      });
+      setIsTaxiPaid(false);
+    },
   });
 
   const onSubmit = async (values: SoinShecmaType) => {
@@ -86,10 +103,11 @@ const AddSoin = () => {
         />
       </div>
       <div className="flex items-center justify-center ">
-        <Input
-          className="bg-gray-300"
-          placeholder="Hotel..."
-          {...form.register("hotel")}
+        <HotelsComboBox
+          type="add"
+          hotelsData={hotelsData}
+          selectedHotel={selectedHotel}
+          setSelectedHotel={setSelectedHotel}
         />
       </div>
       <div className="flex items-center justify-center ">

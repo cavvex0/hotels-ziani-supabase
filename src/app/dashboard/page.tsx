@@ -14,6 +14,7 @@ const Dashboard = async () => {
     .from("soins")
     .select("*")
     .order("created_at", { ascending: true });
+  const { data: hotels } = await supabase.from("hotels").select("*");
 
   if (!soins) {
     return (
@@ -25,9 +26,13 @@ const Dashboard = async () => {
     );
   }
 
+  if (!hotels) {
+    return null;
+  }
+
   return (
     <div className="flex flex-col gap-y-4">
-      <AddSoin />
+      <AddSoin hotelsData={hotels} />
       <DashPage soins={soins} />
     </div>
   );

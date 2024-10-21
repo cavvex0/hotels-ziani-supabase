@@ -13,15 +13,15 @@ const Navbar = () => {
     },
     {
       label: "Toutes les données",
-      href: "/all-data",
+      href: "/dashboard/all-data",
     },
     {
       label: "Ajouter un hôtel",
-      href: "/hotels",
+      href: "/dashboard/hotels",
     },
     {
       label: "Admin",
-      href: "/admin",
+      href: "/dashboard/admin",
     },
   ];
   

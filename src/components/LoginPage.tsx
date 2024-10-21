@@ -91,12 +91,6 @@ const LoginPage = ({ username }: { username: any }) => {
               })}
             </SelectContent>
           </Select>
-          {/* <Input
-            className="bg-gray-300"
-            placeholder="Username"
-            type="text"
-            {...form.register("username")}
-          /> */}
           <Input
             className="bg-gray-300"
             placeholder="Password"
@@ -105,7 +99,7 @@ const LoginPage = ({ username }: { username: any }) => {
           />
         </CardContent>
         <CardFooter className="flex flex-col gap-y-2">
-          <Button disabled={isPending} type="submit">
+          <Button disabled={isPending} type="submit" className="w-full">
             {isPending ? "Proccessing..." : "Login"}
           </Button>
           {error && (
