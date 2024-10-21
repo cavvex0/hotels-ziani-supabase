@@ -69,3 +69,7 @@ body {
     @apply border-border;
   }
 }
+
+.shadoww {
+  box-shadow: 9px 9px 2px -2px #cac9c9;
+}

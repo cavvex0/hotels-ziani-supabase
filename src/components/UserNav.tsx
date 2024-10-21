@@ -16,6 +16,7 @@ import GirlImg from "@/assets/user-female.png";
 import BoyImg from "@/assets/user.png";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
+import { signOutAction } from "../actions/signOut";
 
 type Nav = {
   label: string;
@@ -36,14 +37,6 @@ export default function UserNav({ navLink }: { navLink: Nav }) {
     setRole(role?.role);
   };
   fetchUsername();
-
-  const handleLogout = async () => {
-    try {
-      await supabase.auth.signOut();
-    } finally {
-      router.push("/login");
-    }
-  };
 
   return (
     <div className="flex gap-x-2 lg:gap-x-4 items-center">
@@ -86,7 +79,7 @@ export default function UserNav({ navLink }: { navLink: Nav }) {
           <DropdownMenuItem className="w-full" asChild>
             <div>
               <Button
-                onClick={handleLogout}
+                onClick={() => signOutAction()}
                 className="w-full h-7"
                 variant="ghost"
               >

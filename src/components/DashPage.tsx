@@ -2,18 +2,13 @@
 import { Button } from "@/src/components/ui/button";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
+import AddSoin from "./AddSoin";
 
 const DashPage = () => {
-  const supabase = createClient();
-  const router = useRouter();
-
-  const handleLogout = async () => {
-    supabase.auth.signOut();
-    router.push("/login");
-  };
   return (
-    <div className="">
-      <Button onClick={handleLogout}>Sign out</Button>
+    <div className="flex flex-col gap-y-4">
+      <AddSoin />
+      {/* <HomePage Soins={filteredData} /> */}
     </div>
   );
 };

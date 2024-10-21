@@ -26,7 +26,6 @@ export const getRole = async () => {
     .select("role")
     .eq("id", user?.id)
     .single();
-    console.log(role)
 
   if (error || roleError) {
     console.error("Error fetching user:");

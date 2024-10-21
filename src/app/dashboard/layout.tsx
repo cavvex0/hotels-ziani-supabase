@@ -4,7 +4,7 @@ const DashLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <main>
       <Navbar />
-      {children}
+      <div className="max-w-7xl mx-auto pt-14 min-h-[calc(100vh-6rem)] px-5 lg:px-0">{children}</div>
     </main>
   );
 };
