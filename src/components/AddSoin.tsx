@@ -7,13 +7,21 @@ import { Label } from "./ui/label";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SoinSchema, SoinShecmaType } from "../schema/soinSchema";
-import { createClient } from "@/utils/supabase/client";
 import BainSelector from "./BainSelector";
 import { useMutation } from "@tanstack/react-query";
 import { createSoin } from "../actions/createSoin";
+import { getUsername } from "@/lib/getUserClient";
 
 const AddSoin = () => {
   const [isTaxiPaid, setIsTaxiPaid] = useState(false);
+  const [user, setUser] = useState("");
+
+  const fetchUsername = async () => {
+    const name = await getUsername();
+    setUser(name);
+    form.setValue("user", name);
+  };
+  fetchUsername();
   const [bain, setBain] = useState({
     salam: 0,
     istanbul: 0,
@@ -22,6 +30,7 @@ const AddSoin = () => {
   const form = useForm<SoinShecmaType>({
     resolver: zodResolver(SoinSchema),
     defaultValues: {
+      user,
       name: "",
       hotel: "",
       reception: "",

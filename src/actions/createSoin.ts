@@ -7,7 +7,7 @@ import { revalidatePath } from "next/cache";
 export const createSoin = async (soin: SoinShecmaType) => {
   const supabase = createClient();
 
-  const { data, error } = await supabase.from("soin").insert(soin);
+  const { data, error } = await supabase.from("soins").insert(soin);
   console.log('FormData', soin)
   if (error) {
     console.error(error.message);
