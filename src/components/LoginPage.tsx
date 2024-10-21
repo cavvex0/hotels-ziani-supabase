@@ -1,5 +1,4 @@
 "use client";
-
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -17,13 +16,56 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { signInAction, signUpAction } from "../actions/authActions";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { AuthSchema, AuthSchemaType } from "../schema/authScherma";
+import { useMutation } from "@tanstack/react-query";
+import { createClient } from "@/utils/supabase/client";
 
-const LoginPage = () => {
-  const [isLoading, setIsLoading] = useState(false);
+const LoginPage = ({ username }: { username: any }) => {
   const [error, setError] = useState("");
+
+  const form = useForm({
+    resolver: zodResolver(AuthSchema),
+    defaultValues: {
+      username: "",
+      password: "",
+    },
+  });
+
+  const { mutate, isPending } = useMutation({
+    mutationKey: ["sign_UP"],
+    mutationFn: signInAction,
+    onSuccess: () => {
+      form.reset();
+    },
+  });
+
+  const onSubmit = async (values: AuthSchemaType) => {
+    setError("");
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from("profiles")
+      .select("*")
+      .eq("username", values.username)
+      .single();
+    if (error) {
+      console.error(error.message);
+      return;
+    }
+    if (data.password !== values.password + "00") {
+      setError("Password is incorrect");
+    }
+    if (!values.password) {
+      setError("Password is required");
+    }
+    mutate(values);
+  };
+
   return (
     <form
-      //   onSubmit={handleSubmit}
+      onSubmit={form.handleSubmit(onSubmit)}
       className="flex items-center justify-center h-full"
     >
       <Card className="w-[400px] h-[380px] flex justify-center flex-col gap-y-4">
@@ -31,60 +73,41 @@ const LoginPage = () => {
           <CardTitle className="text-center">Login</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <Select>
+          <Select onValueChange={(value) => form.setValue("username", value)}>
             <SelectTrigger className="w-full bg-gray-300">
               <SelectValue placeholder="Users" />
             </SelectTrigger>
             <SelectContent>
-              {/* {Users.map((user) => {
+              {username.map((user: any, idx: number) => {
                 return (
                   <SelectItem
-                    key={user.id}
-                    value={user.name}
+                    key={idx}
+                    value={user.username}
                     className="capitalize"
                   >
-                    {user.name}
+                    {user.username}
                   </SelectItem>
                 );
-              })} */}
+              })}
             </SelectContent>
           </Select>
+          {/* <Input
+            className="bg-gray-300"
+            placeholder="Username"
+            type="text"
+            {...form.register("username")}
+          /> */}
           <Input
             className="bg-gray-300"
             placeholder="Password"
-            name="password"
             type="password"
-            // onChange={(e) => setPassword(e.target.value.toLocaleLowerCase())}
+            {...form.register("password")}
           />
         </CardContent>
         <CardFooter className="flex flex-col gap-y-2">
-          <Button type="submit" className="w-full">
-            <svg
-              className={`mr-3 h-5 w-5 animate-spin text-white ${
-                isLoading ? "inline-block" : "hidden"
-              } `}
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <circle
-                className="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="4"
-              ></circle>
-              <path
-                className="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-              ></path>
-            </svg>
-            {isLoading ? "Proccessing..." : "Login"}
+          <Button disabled={isPending} type="submit">
+            {isPending ? "Proccessing..." : "Login"}
           </Button>
-
-          <Button>sign UP</Button>
           {error && (
             <span className="text-sm text-red-500 font-semibold">{error}</span>
           )}

@@ -1,6 +1,7 @@
 import { Oswald } from "next/font/google";
 import localfont from "next/font/local";
 import "./globals.css";
+import TanstackProviders from "../providers/TanstackProvider";
 
 const oswald = Oswald({ subsets: ["latin"] });
 
@@ -31,7 +32,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="text-foreground h-full">
-        <div className="h-full">{children}</div>
+        <TanstackProviders>{children}</TanstackProviders>
       </body>
     </html>
   );
