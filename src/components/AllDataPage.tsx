@@ -5,6 +5,7 @@ import { HotelSchemaType, ReceptionSchemaType } from "../schema/hotelSchema";
 import { SoinShecmaType } from "../schema/soinSchema";
 import AllDataHeader from "./AllDataHeader";
 import { useMediaQuery } from "@/hooks/use-media-query";
+import { cn } from "@/lib/utils";
 
 type Props = {
   soins: SoinShecmaType[];
@@ -18,7 +19,7 @@ const AllDataPage = ({ hotels, soins }: Props) => {
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   return (
-    <div className="">
+    <div className="flex flex-col gap-y-4">
       <AllDataHeader
         role="admins"
         receptionist={receptionist}
@@ -30,6 +31,13 @@ const AllDataPage = ({ hotels, soins }: Props) => {
         hotels={hotels}
         soins={soins}
       />
+      <div className="py-9">
+        <div
+          className={cn(
+            "bg-white min-h-[500px] rounded-[37px] shadoww border border-gray-300 relative"
+          )}
+        ></div>
+      </div>
     </div>
   );
 };

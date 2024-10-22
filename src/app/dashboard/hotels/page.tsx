@@ -12,7 +12,7 @@ const Page = async () => {
     return null;
   }
   return (
-    <div className="">
+    <div className="flex-1 min-h-[calc(100vh-12rem)] flex items-center justify-center py-9">
       <HotelsPage hotels={hotels} />
     </div>
   );

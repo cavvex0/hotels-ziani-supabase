@@ -13,10 +13,13 @@ import { useMutation } from "@tanstack/react-query";
 import { createHotel } from "../actions/createHotel";
 import { HotelsComboBox } from "./HotelsComboBox";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const HotelsPage = ({ hotels }: { hotels: ReceptionSchemaType[] }) => {
   const [selectedHotel, setSelectedHotel] = useState("");
   const [receptionist, setReceptionist] = useState("");
+  const router = useRouter();
 
   const formHotel = useForm({
     resolver: zodResolver(HotelSchema),
@@ -39,6 +42,7 @@ const HotelsPage = ({ hotels }: { hotels: ReceptionSchemaType[] }) => {
     mutationFn: createHotel,
     onSuccess: () => {
       formHotel.reset();
+      router.push("/dashboard");
     },
   });
 
@@ -48,16 +52,27 @@ const HotelsPage = ({ hotels }: { hotels: ReceptionSchemaType[] }) => {
     onSuccess: () => {
       formReceptionist.reset();
       setSelectedHotel("");
+      router.push("/dashboard");
     },
   });
 
   const onSubmitHotel = async (values: HotelSchemaType) => {
+    if (!values.name || !values.receptions) {
+      toast.error("Veuillez remplir tous les champs");
+      return;
+    }
     mutateHotel(values);
+    toast.success("Ajouté avec succès");
   };
 
   const onSubmitReceptionist = async (values: HotelSchemaType) => {
+    if (!values.receptions) {
+      toast.error("Veuillez remplir tous les champs");
+      return;
+    }
     const receptionistData = { ...values, name: selectedHotel }; // include the selected hotel with receptionist data
     mutateReceptionist(receptionistData);
+    toast.success("Ajouté avec succès");
   };
 
   useEffect(() => {
@@ -67,7 +82,7 @@ const HotelsPage = ({ hotels }: { hotels: ReceptionSchemaType[] }) => {
   }, [selectedHotel, receptionist, formReceptionist]);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-9 lg:gap-20 pb-14">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-9 lg:gap-20 w-full">
       <div className="bg-white shadow rounded-[35px] lg:h-[500px] p-9 border border-gray-300">
         <form
           onSubmit={formHotel.handleSubmit(onSubmitHotel)}

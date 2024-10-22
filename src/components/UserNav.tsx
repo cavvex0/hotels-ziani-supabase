@@ -10,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getRole, getUsername } from "@/lib/getUserClient";
 import GirlImg from "@/assets/user-female.png";
 import BoyImg from "@/assets/user.png";
@@ -36,7 +36,9 @@ export default function UserNav({ navLink }: { navLink: Nav }) {
     setUsername(name);
     setRole(role?.role);
   };
-  fetchUsername();
+  useEffect(() => {
+    fetchUsername();
+  }, []);
 
   return (
     <div className="flex gap-x-2 lg:gap-x-4 items-center">
