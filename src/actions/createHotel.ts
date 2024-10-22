@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import { HotelSchemaType } from "../schema/hotelSchema";
 
 export const createHotel = async (formData: HotelSchemaType) => {
-  const { name, reception } = formData;
+  const { name, receptions } = formData;
   const supabase = createClient();
   const { data: existingHotel, error } = await supabase
     .from("hotels")
@@ -18,7 +18,7 @@ export const createHotel = async (formData: HotelSchemaType) => {
   }
   if (existingHotel) {
     // Update the existing hotel's receptions array
-    const updatedReceptions = [...existingHotel.receptions, reception];
+    const updatedReceptions = [...existingHotel.receptions, receptions];
 
     const { error: updateError } = await supabase
       .from("hotels")
@@ -32,7 +32,7 @@ export const createHotel = async (formData: HotelSchemaType) => {
     // Create a new hotel with the provided reception
     const { error: insertError } = await supabase
       .from("hotels")
-      .insert([{ name, receptions: [reception] }]);
+      .insert([{ name, receptions: [receptions] }]);
 
     if (insertError) {
       throw new Error("Error creating hotel");

@@ -2,6 +2,7 @@
 
 import * as React from "react";
 
+import { useMediaQuery } from "@/hooks/use-media-query";
 import { Button } from "./ui/button";
 import {
   Command,
@@ -12,21 +13,26 @@ import {
   CommandList,
 } from "./ui/command";
 import { Drawer, DrawerContent, DrawerTrigger } from "./ui/drawer";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "./ui/popover";
 
 import { cn } from "@/lib/utils";
-import { useMediaQuery } from "@/hooks/use-media-query";
 import { HotelSchemaType, ReceptionSchemaType } from "../schema/hotelSchema";
 
-export function HotelsComboBox({
+export function ReceptionsComboBox({
   hotelsData,
-  setSelectedHotel,
   selectedHotel,
+  receptionist,
+  setReceptionist,
   type,
 }: {
   hotelsData: ReceptionSchemaType[];
   selectedHotel: any;
-  setSelectedHotel: any;
+  setReceptionist: any;
+  receptionist: any;
   type: string;
 }) {
   const [open, setOpen] = React.useState(false);
@@ -40,24 +46,18 @@ export function HotelsComboBox({
             variant="outline"
             className="w-full bg-gray-300 text-gray-500 hover:text-gray-500 justify-start font-normal"
           >
-            {selectedHotel ? <>{selectedHotel}</> : <>Hotels/Guide...</>}
+            {receptionist ? <>{receptionist}</> : <>Receptionist...</>}
           </Button>
         </PopoverTrigger>
         <PopoverContent
-          className={cn(
-            "p-0",
-            type === "allData"
-              ? "w-[400px]"
-              : type === "addHotel"
-                ? "w-[510px]"
-                : "w-[200px]"
-          )}
+          className={cn("p-0", type === "allData" ? "w-[400px]" : "w-[200px]")}
           align="start"
         >
-          <HotelsList
+          <ReceptionistsList
             setOpen={setOpen}
-            setSelectedHotel={setSelectedHotel}
+            setReceptionist={setReceptionist}
             hotelsData={hotelsData}
+            selectedHotel={selectedHotel}
           />
         </PopoverContent>
       </Popover>
@@ -71,15 +71,16 @@ export function HotelsComboBox({
           variant="outline"
           className="w-full bg-gray-300 text-gray-500 hover:text-gray-500 justify-start font-normal"
         >
-          {selectedHotel ? <>{selectedHotel}</> : <>Hotels/Guide...</>}
+          {receptionist ? <>{receptionist}</> : <>Receptionist...</>}
         </Button>
       </DrawerTrigger>
       <DrawerContent>
         <div className="mt-4 border-t">
-          <HotelsList
+          <ReceptionistsList
             setOpen={setOpen}
-            setSelectedHotel={setSelectedHotel}
+            setReceptionist={setReceptionist}
             hotelsData={hotelsData}
+            selectedHotel={selectedHotel}
           />
         </div>
       </DrawerContent>
@@ -87,14 +88,16 @@ export function HotelsComboBox({
   );
 }
 
-function HotelsList({
+function ReceptionistsList({
   setOpen,
-  setSelectedHotel,
+  setReceptionist,
+  selectedHotel,
   hotelsData,
 }: {
+  selectedHotel: any;
   hotelsData: ReceptionSchemaType[];
   setOpen: (open: boolean) => void;
-  setSelectedHotel: (hotel: any) => void;
+  setReceptionist: (hotel: any) => void;
 }) {
   return (
     <Command>
@@ -102,19 +105,26 @@ function HotelsList({
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup>
-          {hotelsData.map((hotel) => (
-            <CommandItem
-              key={hotel.name}
-              value={hotel.name}
-              onSelect={(value) => {
-                const selected = hotelsData.find((h) => h.name === value);
-                setSelectedHotel(selected?.name);
-                setOpen(false);
-              }}
-            >
-              {hotel.name}
-            </CommandItem>
-          ))}
+          {selectedHotel && (
+            <>
+              {hotelsData
+                .find((hotel) => hotel.name === selectedHotel)
+                ?.receptions.map((user) => {
+                  return (
+                    <CommandItem
+                      key={user}
+                      value={user}
+                      onSelect={(value) => {
+                        setReceptionist(value);
+                        setOpen(false);
+                      }}
+                    >
+                      {user}
+                    </CommandItem>
+                  );
+                })}
+            </>
+          )}
         </CommandGroup>
       </CommandList>
     </Command>

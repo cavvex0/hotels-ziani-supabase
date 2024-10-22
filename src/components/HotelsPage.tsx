@@ -13,7 +13,7 @@ const HotelsPage = () => {
     resolver: zodResolver(HotelSchema),
     defaultValues: {
       name: "",
-      reception: "",
+      receptions: "",
     },
   });
 
@@ -43,7 +43,7 @@ const HotelsPage = () => {
           <Input
             className="bg-gray-300"
             placeholder="Receptionist..."
-            {...form.register("reception")}
+            {...form.register("receptions")}
           />
           <Button type="submit" className="w-full">
             Ajouter

@@ -12,14 +12,16 @@ import { useMutation } from "@tanstack/react-query";
 import { createSoin } from "../actions/createSoin";
 import { getUsername } from "@/lib/getUserClient";
 import { HotelsComboBox } from "./HotelsComboBox";
-import { HotelSchemaType } from "../schema/hotelSchema";
+import { HotelSchemaType, ReceptionSchemaType } from "../schema/hotelSchema";
+import { ReceptionsComboBox } from "./ReceptionsComboBox";
 
 type Props = {
-  hotelsData: HotelSchemaType[];
+  hotelsData: ReceptionSchemaType[];
 };
 
 const AddSoin = ({ hotelsData }: Props) => {
-  const [selectedHotel, setSelectedHotel] = useState('');
+  const [selectedHotel, setSelectedHotel] = useState("");
+  const [receptionist, setReceptionist] = useState("");
   const [isTaxiPaid, setIsTaxiPaid] = useState(false);
   const [user, setUser] = useState("");
 
@@ -111,10 +113,12 @@ const AddSoin = ({ hotelsData }: Props) => {
         />
       </div>
       <div className="flex items-center justify-center ">
-        <Input
-          className="bg-gray-300"
-          placeholder="Reception..."
-          {...form.register("reception")}
+        <ReceptionsComboBox
+          type="add"
+          selectedHotel={selectedHotel}
+          hotelsData={hotelsData}
+          receptionist={receptionist}
+          setReceptionist={setReceptionist}
         />
       </div>
       <div className="flex items-center justify-center ">
