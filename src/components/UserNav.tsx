@@ -17,6 +17,7 @@ import BoyImg from "@/assets/user.png";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
 import { signOutAction } from "../actions/signOut";
+import { set } from "date-fns";
 
 type Nav = {
   label: string;
@@ -27,6 +28,7 @@ export default function UserNav({ navLink }: { navLink: Nav }) {
   const [username, setUsername] = useState("");
   const [role, setRole] = useState("");
   const [open, setOpen] = useState(false);
+  const [isReady, setIsReady] = useState(true);
   const supabase = createClient();
   const router = useRouter();
 
@@ -38,7 +40,16 @@ export default function UserNav({ navLink }: { navLink: Nav }) {
   };
   useEffect(() => {
     fetchUsername();
-  }, []);
+    if (username) setIsReady(false);
+  }, [username]);
+
+  if (isReady) {
+    return (
+      <div className="absolute inset-0 bg-prime text-white z-50 flex items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
 
   return (
     <div className="flex gap-x-2 lg:gap-x-4 items-center">
