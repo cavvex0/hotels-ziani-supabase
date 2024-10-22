@@ -19,7 +19,7 @@ const Page = async () => {
 
   return (
     <div className="">
-      <AllDataPage soins={soins} hotels={hotels} />
+      <AllDataPage soins={soins} hotels={hotels} role="admin" />
     </div>
   );
 };
