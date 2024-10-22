@@ -8,13 +8,14 @@ import { HotelsComboBox } from "./HotelsComboBox";
 import { ReceptionSchemaType } from "../schema/hotelSchema";
 import { SoinShecmaType } from "../schema/soinSchema";
 import { ReceptionsComboBox } from "./ReceptionsComboBox";
+import { format } from "date-fns";
 type Props = {
   role: string;
   hotels: ReceptionSchemaType[];
   soins: SoinShecmaType[];
   selectedHotel: any;
   setSelectedHotel: any;
-  selectedDate: any;
+  selectedDate: Date | null;
   setSelectedDate: any;
   receptionist: string;
   setReceptionist: any;
@@ -47,14 +48,18 @@ const AllDataHeader = ({
               )}
             >
               <CalendarIcon className="mr-2 h-4 w-4" />
-              <span>Choisis une date...</span>
+              {selectedDate ? (
+                format(selectedDate, "dd/MM/yyyy")
+              ) : (
+                <span>Choisis une date...</span>
+              )}
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-auto p-0">
             <Calendar
               mode="single"
               initialFocus
-              selected={selectedDate}
+              selected={selectedDate || new Date()}
               onSelect={setSelectedDate}
             />
           </PopoverContent>
