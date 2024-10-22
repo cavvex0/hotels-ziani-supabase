@@ -1,7 +1,27 @@
-const Page = () => {
-  return (
-    <div className=''>Page</div>
-  )
-}
+import AllDataPage from "@/src/components/AllDataPage";
+import { createClient } from "@/utils/supabase/server";
 
-export default Page
+const Page = async () => {
+  const supabase = createClient();
+
+  const { data: soins } = await supabase
+    .from("soins")
+    .select("*")
+    .order("created_at", { ascending: true });
+  const { data: hotels } = await supabase
+    .from("hotels")
+    .select("*")
+    .order("name", { ascending: true });
+
+  if (!soins || !hotels) {
+    return null;
+  }
+
+  return (
+    <div className="">
+      <AllDataPage soins={soins} hotels={hotels} />
+    </div>
+  );
+};
+
+export default Page;
