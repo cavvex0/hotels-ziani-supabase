@@ -90,13 +90,13 @@ const AddSoin = ({ hotelsData }: Props) => {
 
   const onSubmit = async (values: SoinShecmaType) => {
     if (!values.name) {
-      toast.error("Please Entre soin name");
+      toast.error("Veuillez entrer le nom du soin");
       return;
     } else if (!values.hotel) {
-      toast.error("Please select hotel");
+      toast.error("Veuillez sélectionner un hôtel");
       return;
     } else if (!values.reception) {
-      toast.error("Please select reception");
+      toast.error("Veuillez sélectionner une réception");
       return;
     }
     mutate(values);
