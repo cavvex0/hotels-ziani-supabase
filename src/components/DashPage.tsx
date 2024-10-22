@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 
 const handleTaxiChange = (id: string) => {
   handleTaxi(id);
+  toast.success("Payé avec succès");
 };
 const handlePay = async (id: string) => {
   try {

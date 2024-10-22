@@ -14,7 +14,10 @@ const Dashboard = async () => {
     .from("soins")
     .select("*")
     .order("created_at", { ascending: true });
-  const { data: hotels } = await supabase.from("hotels").select("*");
+  const { data: hotels } = await supabase
+    .from("hotels")
+    .select("*")
+    .order("name", { ascending: true });
 
   if (!soins) {
     return (

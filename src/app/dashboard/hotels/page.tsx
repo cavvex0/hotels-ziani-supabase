@@ -4,7 +4,10 @@ import { createClient } from "@/utils/supabase/server";
 const Page = async () => {
   const supabase = createClient();
 
-  const { data: hotels } = await supabase.from("hotels").select("*");
+  const { data: hotels } = await supabase
+    .from("hotels")
+    .select("*")
+    .order("name", { ascending: true });
   if (!hotels) {
     return null;
   }

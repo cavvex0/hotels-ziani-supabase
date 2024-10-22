@@ -18,7 +18,7 @@ const HotelsPage = ({ hotels }: { hotels: ReceptionSchemaType[] }) => {
   const [selectedHotel, setSelectedHotel] = useState("");
   const [receptionist, setReceptionist] = useState("");
 
-  const form = useForm({
+  const formHotel = useForm({
     resolver: zodResolver(HotelSchema),
     defaultValues: {
       name: "",
@@ -26,31 +26,51 @@ const HotelsPage = ({ hotels }: { hotels: ReceptionSchemaType[] }) => {
     },
   });
 
-  const { mutate } = useMutation({
-    mutationKey: ["create_hotel"],
-    mutationFn: createHotel,
-  });
-  const { mutate: mutate2 } = useMutation({
-    mutationKey: ["create_reception"],
-    mutationFn: createHotel,
+  const formReceptionist = useForm({
+    resolver: zodResolver(HotelSchema),
+    defaultValues: {
+      name: "",
+      receptions: "",
+    },
   });
 
-  const onSubmit = async (values: HotelSchemaType) => {
-    mutate(values);
+  const { mutate: mutateHotel } = useMutation({
+    mutationKey: ["create_hotel"],
+    mutationFn: createHotel,
+    onSuccess: () => {
+      formHotel.reset();
+    },
+  });
+
+  const { mutate: mutateReceptionist } = useMutation({
+    mutationKey: ["create_reception"],
+    mutationFn: createHotel,
+    onSuccess: () => {
+      formReceptionist.reset();
+      setSelectedHotel("");
+    },
+  });
+
+  const onSubmitHotel = async (values: HotelSchemaType) => {
+    mutateHotel(values);
   };
-  const onSubmit2 = async (values: HotelSchemaType) => {
-    mutate2(values);
+
+  const onSubmitReceptionist = async (values: HotelSchemaType) => {
+    const receptionistData = { ...values, name: selectedHotel }; // include the selected hotel with receptionist data
+    mutateReceptionist(receptionistData);
   };
+
   useEffect(() => {
     if (selectedHotel) {
-      form.setValue("name", selectedHotel);
+      formReceptionist.setValue("receptions", receptionist);
     }
-  }, [selectedHotel]);
+  }, [selectedHotel, receptionist, formReceptionist]);
+
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-9 lg:gap-20 pb-14  ">
-      <div className="bg-white shadoww rounded-[35px] lg:h-[500px] p-9 border border-gray-300">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-9 lg:gap-20 pb-14">
+      <div className="bg-white shadow rounded-[35px] lg:h-[500px] p-9 border border-gray-300">
         <form
-          onSubmit={form.handleSubmit(onSubmit)}
+          onSubmit={formHotel.handleSubmit(onSubmitHotel)}
           className="flex flex-col items-center justify-center h-full gap-4"
         >
           <h1 className="font-realce text-2xl lg:text-4xl text-left w-full mb-8 uppercase">
@@ -59,21 +79,22 @@ const HotelsPage = ({ hotels }: { hotels: ReceptionSchemaType[] }) => {
           <Input
             className="bg-gray-300"
             placeholder="Hotels..."
-            {...form.register("name")}
+            {...formHotel.register("name")}
           />
           <Input
             className="bg-gray-300"
             placeholder="Receptionist..."
-            {...form.register("receptions")}
+            {...formHotel.register("receptions")}
           />
           <Button type="submit" className="w-full">
             Ajouter
           </Button>
         </form>
       </div>
-      <div className="bg-white shadoww rounded-[35px] lg:h-[500px] p-9  border border-gray-300">
+
+      <div className="bg-white shadow rounded-[35px] lg:h-[500px] p-9 border border-gray-300">
         <form
-          onSubmit={form.handleSubmit(onSubmit2)}
+          onSubmit={formReceptionist.handleSubmit(onSubmitReceptionist)}
           className="flex flex-col items-center justify-center h-full gap-4"
         >
           <h1 className="font-realce text-2xl lg:text-4xl text-left w-full mb-8 uppercase">
@@ -90,7 +111,7 @@ const HotelsPage = ({ hotels }: { hotels: ReceptionSchemaType[] }) => {
           <Input
             className="bg-gray-300"
             placeholder="Receptionist..."
-            {...form.register("receptions")}
+            {...formReceptionist.register("receptions")}
           />
           <Button type="submit" className="w-full">
             Ajouter
