@@ -22,11 +22,13 @@ export function HotelsComboBox({
   hotelsData,
   setSelectedHotel,
   selectedHotel,
+  setReceptionist,
   type,
 }: {
   hotelsData: ReceptionSchemaType[];
   selectedHotel: any;
   setSelectedHotel: any;
+  setReceptionist: any;
   type: string;
 }) {
   const [open, setOpen] = React.useState(false);
@@ -58,6 +60,7 @@ export function HotelsComboBox({
             setOpen={setOpen}
             setSelectedHotel={setSelectedHotel}
             hotelsData={hotelsData}
+            setReceptionist={setReceptionist}
           />
         </PopoverContent>
       </Popover>
@@ -80,6 +83,7 @@ export function HotelsComboBox({
             setOpen={setOpen}
             setSelectedHotel={setSelectedHotel}
             hotelsData={hotelsData}
+            setReceptionist={setReceptionist}
           />
         </div>
       </DrawerContent>
@@ -91,10 +95,12 @@ function HotelsList({
   setOpen,
   setSelectedHotel,
   hotelsData,
+  setReceptionist,
 }: {
   hotelsData: ReceptionSchemaType[];
   setOpen: (open: boolean) => void;
   setSelectedHotel: (hotel: any) => void;
+  setReceptionist: (receptions: any) => void;
 }) {
   return (
     <Command>
@@ -109,6 +115,7 @@ function HotelsList({
               onSelect={(value) => {
                 const selected = hotelsData.find((h) => h.name === value);
                 setSelectedHotel(selected?.name);
+                setReceptionist('')
                 setOpen(false);
               }}
             >

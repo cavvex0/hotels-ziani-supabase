@@ -2,6 +2,7 @@ import { Oswald } from "next/font/google";
 import localfont from "next/font/local";
 import "./globals.css";
 import TanstackProviders from "../providers/TanstackProvider";
+import { Toaster } from "react-hot-toast";
 
 const oswald = Oswald({ subsets: ["latin"] });
 
@@ -33,6 +34,16 @@ export default function RootLayout({
     >
       <body className="text-foreground h-full">
         <TanstackProviders>{children}</TanstackProviders>
+        <Toaster
+          toastOptions={{
+            className: "text-sm",
+            style: {
+              border: "1px solid #713200",
+              padding: "16px",
+              color: "#713200",
+            },
+          }}
+        />
       </body>
     </html>
   );

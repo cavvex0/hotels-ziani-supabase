@@ -7,24 +7,50 @@ import { deleteSoin, handlePaye, handleTaxi } from "../actions/handleSoin";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import { CircleXIcon } from "lucide-react";
+import toast from "react-hot-toast";
 
 const handleTaxiChange = (id: string) => {
   handleTaxi(id);
 };
-const handlePay = (id: string) => {
-  handlePaye(id);
+const handlePay = async (id: string) => {
+  try {
+    const response = await handlePaye(id);
+
+    if (!response?.success) {
+      toast.error(response?.message ?? "Erreur inconnue");
+      return;
+    }
+
+    toast.success("Payé avec succès");
+  } catch (error) {
+    toast.error("Erreur inconnue");
+  }
 };
-const handleDelete = (id: string) => {
-  deleteSoin(id);
+const handleDelete = async (id: string) => {
+  try {
+    const response = await deleteSoin(id);
+
+    if (!response?.success) {
+      toast.error(response?.message ?? "Erreur inconnue");
+      return;
+    }
+
+    toast.success("Annulé avec succès!");
+  } catch (error) {
+    toast.error("Erreur inconnue");
+  }
 };
 const DashPage = ({ soins }: { soins: DashSoinShecmaType[] }) => {
-  const calcSalam = soins.filter((row) => row.price)
+  const calcSalam = soins
+    .filter((row) => row.price)
     .map((soin) => soin.salam)
     .reduce((acc, curr) => acc + curr * 50, 0);
-  const calcIstanbul = soins.filter((row) => row.price)
+  const calcIstanbul = soins
+    .filter((row) => row.price)
     .map((soin) => soin.istanbul)
     .reduce((acc, curr) => acc + curr * 50, 0);
-  const calcOrient = soins.filter((row) => row.price)
+  const calcOrient = soins
+    .filter((row) => row.price)
     .map((soin) => soin.orient)
     .reduce((acc, curr) => acc + curr * 50, 0);
   return (

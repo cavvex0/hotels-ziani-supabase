@@ -14,6 +14,7 @@ import { getUsername } from "@/lib/getUserClient";
 import { HotelsComboBox } from "./HotelsComboBox";
 import { HotelSchemaType, ReceptionSchemaType } from "../schema/hotelSchema";
 import { ReceptionsComboBox } from "./ReceptionsComboBox";
+import toast from "react-hot-toast";
 
 type Props = {
   hotelsData: ReceptionSchemaType[];
@@ -82,16 +83,34 @@ const AddSoin = ({ hotelsData }: Props) => {
         orient: 0,
       });
       setIsTaxiPaid(false);
+      setSelectedHotel("");
+      setReceptionist("");
     },
   });
 
   const onSubmit = async (values: SoinShecmaType) => {
+    if (!values.name) {
+      toast.error("Please Entre soin name");
+      return;
+    } else if (!values.hotel) {
+      toast.error("Please select hotel");
+      return;
+    } else if (!values.reception) {
+      toast.error("Please select reception");
+      return;
+    }
     mutate(values);
+    toast.success("Soin ajouté avec succès");
+
   };
 
   const handleTaxiPaye = () => {
     setIsTaxiPaid(!isTaxiPaid);
   };
+  useEffect(() => {
+    form.setValue("hotel", selectedHotel);
+    form.setValue("reception", receptionist);
+  }, [form, selectedHotel, receptionist]);
   return (
     <form
       onSubmit={form.handleSubmit(onSubmit)}
@@ -110,6 +129,7 @@ const AddSoin = ({ hotelsData }: Props) => {
           hotelsData={hotelsData}
           selectedHotel={selectedHotel}
           setSelectedHotel={setSelectedHotel}
+          setReceptionist={setReceptionist}
         />
       </div>
       <div className="flex items-center justify-center ">
