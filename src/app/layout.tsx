@@ -33,6 +33,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="text-foreground h-full">
+        
         <TanstackProviders>{children}</TanstackProviders>
         <Toaster
           toastOptions={{
