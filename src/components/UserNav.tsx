@@ -45,7 +45,7 @@ export default function UserNav({ navLink }: { navLink: Nav }) {
 
   if (isReady) {
     return (
-      <div className="absolute inset-0 bg-prime text-white z-50 flex items-center justify-center">
+      <div className="absolute inset-0 h-screen w-screen bg-prime text-white z-50 flex items-center justify-center">
         Loading...
       </div>
     );
