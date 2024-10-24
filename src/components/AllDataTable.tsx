@@ -4,18 +4,17 @@ import { cn } from "@/lib/utils";
 import { DashSoinShecmaType } from "../schema/soinSchema";
 
 type Props = {
-    soin: DashSoinShecmaType;
-    role: string;
+  soin: DashSoinShecmaType;
+  role: string;
 };
 
-const AllDataTable = ({ soin, role }:Props) => {
+const AllDataTable = ({ soin, role }: Props) => {
   return (
     <div
       className={cn(
         "grid px-4 border-b py-3 text-sm hover:bg-gray-100",
         role === "admin" ? "grid-cols-12" : "grid-cols-11"
       )}
-      key={soin.id}
     >
       <div className="flex items-center justify-center capitalize">
         {soin.user.charAt(0)}
