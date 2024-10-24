@@ -32,7 +32,7 @@ export function HotelsComboBox({
   type: string;
 }) {
   const [open, setOpen] = React.useState(false);
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
 
   if (isDesktop) {
     return (

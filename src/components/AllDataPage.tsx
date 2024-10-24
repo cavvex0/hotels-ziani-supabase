@@ -20,7 +20,7 @@ const AllDataPage = ({ hotels, soins, role }: Props) => {
   const [selectedHotel, setSelectedHotel] = useState("");
   const [receptionist, setReceptionist] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
   const [showpaidCheck, setShowpaidCheck] = useState(false);
 
   const filteredRows = soins.filter((row) => {
