@@ -34,7 +34,7 @@ const Dashboard = async () => {
   }
 
   return (
-    <div className="flex flex-col gap-y-4">
+    <div className="flex flex-col gap-y-4 ">
       <AddSoin hotelsData={hotels} />
       <DashPage soins={soins} />
     </div>

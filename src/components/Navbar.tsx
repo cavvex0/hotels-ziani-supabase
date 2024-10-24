@@ -27,7 +27,7 @@ const Navbar = () => {
 
   return (
     <div className="bg-prime h-[6rem] w-screen">
-      <div className="max-w-7xl mx-auto flex items-center justify-between h-full text-white px-6 lg:p-0 w-full">
+      <div className="max-w-7xl mx-auto flex items-center justify-between h-full text-white px-6 xl:p-0 w-full ">
         <Link href={"/"} className="font-realce text-4xl ">
           <span className="text-orange-600">Z</span>IANI
         </Link>

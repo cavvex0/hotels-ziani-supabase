@@ -65,7 +65,7 @@ const AllDataHeader = ({
           </PopoverContent>
         </Popover>
         <Button
-          onClick={() => setSelectedDate(new Date())}
+          onClick={() => setSelectedDate(null)}
           variant="outline"
           className="absolute right-0 z-20 cursor-pointer bg-gray-300 outline-none border-none"
         >

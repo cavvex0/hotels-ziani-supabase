@@ -42,6 +42,7 @@ const HotelsPage = ({ hotels }: { hotels: ReceptionSchemaType[] }) => {
     mutationFn: createHotel,
     onSuccess: () => {
       formHotel.reset();
+      setSelectedHotel("");
       router.push("/dashboard");
     },
   });
@@ -66,7 +67,7 @@ const HotelsPage = ({ hotels }: { hotels: ReceptionSchemaType[] }) => {
   };
 
   const onSubmitReceptionist = async (values: HotelSchemaType) => {
-    if (!values.receptions) {
+    if (!selectedHotel || !values.receptions) {
       toast.error("Veuillez remplir tous les champs");
       return;
     }
