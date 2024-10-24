@@ -61,18 +61,20 @@ const AllDataPage = ({ hotels, soins, role }: Props) => {
 
   return (
     <div className="flex flex-col gap-y-4">
-      <AllDataHeader
-        role="admins"
-        receptionist={receptionist}
-        setReceptionist={setReceptionist}
-        selectedHotel={selectedHotel}
-        setSelectedHotel={setSelectedHotel}
-        selectedDate={selectedDate}
-        setSelectedDate={setSelectedDate}
-        hotels={hotels}
-        soins={soins}
-      />
-      <div className="py-9">
+      <div>
+        <AllDataHeader
+          role="admins"
+          receptionist={receptionist}
+          setReceptionist={setReceptionist}
+          selectedHotel={selectedHotel}
+          setSelectedHotel={setSelectedHotel}
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
+          hotels={hotels}
+          soins={soins}
+        />
+      </div>
+      <div className="py-9 hidden lg:block">
         <div
           className={cn(
             "bg-white min-h-[500px] rounded-[37px] shadoww border border-gray-300 relative pb-[4rem]"
@@ -106,34 +108,34 @@ const AllDataPage = ({ hotels, soins, role }: Props) => {
           {filteredRows.map((soin) => (
             <AllDataTable soin={soin} key={soin.id} role={role} />
           ))}
-            <div className="absolute bottom-[1.2rem] left-0 border-t w-full px-14 pt-5 flex justify-between gap-x-4">
-        <div className="flex items-center gap-x-2">
-          <p className=" uppercase font-realce text-sm lg:text-xl ">
-            Total Payéé : <span className="text-red-500">{totalPayé}</span> DHs
-          </p>
-          <div className=" w-[2px] h-6 lg:w-1 lg:h-7 bg-orange-500 rounded-full" />
-          <p className=" uppercase font-realce text-sm lg:text-xl ">
-            Total Non Payéé :{" "}
-            <span className="text-green-500">{totalNonPayé}</span> DHs
-          </p>
+          <div className="absolute bottom-[1.2rem] left-0 border-t w-full px-14 pt-5 flex justify-between gap-x-4">
+            <div className="flex items-center gap-x-2">
+              <p className=" uppercase font-realce text-sm lg:text-xl ">
+                Total Payéé : <span className="text-red-500">{totalPayé}</span>{" "}
+                DHs
+              </p>
+              <div className=" w-[2px] h-6 lg:w-1 lg:h-7 bg-orange-500 rounded-full" />
+              <p className=" uppercase font-realce text-sm lg:text-xl ">
+                Total Non Payéé :{" "}
+                <span className="text-green-500">{totalNonPayé}</span> DHs
+              </p>
+            </div>
+            <div className="flex items-center gap-x-9 font-realce text-xl">
+              <p className="text-blue-500">
+                <span className="mr-2 text-black">{calcSalam / 50}</span>
+                SAL : <span className="text-black">{calcSalam}</span> DH
+              </p>
+              <p className="text-green-500">
+                <span className="mr-2 text-black">{calcIstanbul / 50}</span>
+                IST : <span className="text-black">{calcIstanbul}</span> DH
+              </p>
+              <p className="text-rose-500">
+                <span className="mr-2 text-black">{calcOrient / 50}</span>
+                ORI : <span className="text-black">{calcOrient}</span> DH
+              </p>
+            </div>
+          </div>
         </div>
-        <div className="flex items-center gap-x-9 font-realce text-xl">
-          <p className="text-blue-500">
-            <span className="mr-2 text-black">{calcSalam / 50}</span>
-            SAL : <span className="text-black">{calcSalam}</span> DH
-          </p>
-          <p className="text-green-500">
-            <span className="mr-2 text-black">{calcIstanbul / 50}</span>
-            IST : <span className="text-black">{calcIstanbul}</span> DH
-          </p>
-          <p className="text-rose-500">
-            <span className="mr-2 text-black">{calcOrient / 50}</span>
-            ORI : <span className="text-black">{calcOrient}</span> DH
-          </p>
-        </div>
-      </div>
-        </div>
-        
       </div>
     </div>
   );

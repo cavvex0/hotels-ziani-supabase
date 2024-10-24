@@ -54,7 +54,7 @@ const DashPage = ({ soins }: { soins: DashSoinShecmaType[] }) => {
     .map((soin) => soin.orient)
     .reduce((acc, curr) => acc + curr * 50, 0);
   return (
-    <div className="py-9">
+    <div className="py-9 hidden lg:block">
       <div className="bg-white min-h-[500px] rounded-[37px] shadoww border border-gray-300 relative pb-[4rem]">
         <div className="grid grid-cols-12 border-b h-14 px-4 text-[15px]">
           <div className="flex items-center justify-center ">@</div>
