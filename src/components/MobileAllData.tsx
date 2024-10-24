@@ -4,26 +4,16 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { DashSoinShecmaType } from "../schema/soinSchema";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import { CircleXIcon } from "lucide-react";
+import { DashSoinShecmaType } from "../schema/soinSchema";
 import { format } from "date-fns";
-import { Switch } from "./ui/switch";
 
 type Props = {
   soin: DashSoinShecmaType;
-  handleTaxiChange: (id: string) => void;
-  handlePay: (id: string) => void;
-  handleDelete: (id: string) => void;
 };
-
-const MobileDash = ({
-  soin,
-  handleTaxiChange,
-  handlePay,
-  handleDelete,
-}: Props) => {
+function MobileAllData({ soin }: Props) {
   return (
     <Accordion type="single" collapsible>
       <AccordionItem value="item-1" className={cn("bg-white")}>
@@ -43,9 +33,7 @@ const MobileDash = ({
         </AccordionTrigger>
         <AccordionContent>
           <div className="flex items-center justify-between px-3">
-            <div className="">
-              <span>{soin.name}</span>
-            </div>
+            <span>{soin.name}</span>
             <div className="flex items-center gap-x-3">
               <span className="text-[13px] font-mono bg-blue-300 h-5 w-5 border border-black font-semibold text-blue-800 flex items-center justify-center rounded-full">
                 {soin.salam}
@@ -57,58 +45,55 @@ const MobileDash = ({
                 {soin.orient}
               </span>
             </div>
-            <span>{format(new Date(soin.created_at), "HH:mm")}</span>
-            {soin.taxi ? (
+            <span>{format(new Date(soin.created_at), "dd/MM/yyyy  HH:mm")}</span>
+            {soin.taxi && (
               <span className="bg-yellow-400 px-3 border border-black">
                 Taxi
               </span>
-            ) : (
-              <div className="">
-                <Switch onClick={() => handleTaxiChange(soin.id)} id="" />
-              </div>
             )}
           </div>
-          <div className="px-3 mt-3 flex items-center justify-between">
-            {soin.paidBy ? (
-              <p>
-                Payé avec{" "}
-                <span className="bg-rose-300 px-2 border border-black ml-2 capitalize">
-                  {soin.paidBy}
-                </span>
-              </p>
-            ) : (
-              <span>Pas encore payé</span>
+        </AccordionContent>
+        <AccordionContent className="px-3 flex items-center justify-between">
+          {soin.paidBy ? (
+            <p>
+              Payé avec{" "}
+              <span className="bg-rose-300 px-2 border border-black ml-2 capitalize">
+                {soin.paidBy}
+              </span>
+            </p>
+          ) : (
+            <span>Pas encore payé</span>
+          )}
+          <div className="flex items-center gap-x-2">
+            <span>le</span>
+            {soin.paidBy && (
+              <div>{format(new Date(soin.updated_at), "dd/MM/yyyy")}</div>
             )}
-            <div className="flex items-center gap-x-2">
-              <span>le</span>
-              {soin.paidBy && (
-                <div>{format(new Date(soin.updated_at), "dd/MM/yyyy")}</div>
+          </div>
+          <div>
+            <Button
+              //   onClick={() => handlePay(soin.id, soin.paidBy)}
+              className={cn(
+                "h-7 w-15 text-sm bg-green-700 hover:bg-green-800 border border-black rounded-none"
               )}
-            </div>
+            >
+              Payer
+            </Button>
+          </div>
+          {/* {role === "admin" && (
             <div>
               <Button
-                onClick={() => handlePay(soin.id)}
-                className={cn(
-                  "h-7 w-15 text-sm bg-green-700 hover:bg-green-800 border border-black rounded-none"
-                )}
-              >
-                Payer
-              </Button>
-            </div>
-            <div>
-              <Button
-                onClick={() => handleDelete(soin.id)}
+                // onClick={() => handleDelete(soin.id)}
                 size="icon"
                 variant="cancel"
               >
                 <CircleXIcon />
               </Button>
             </div>
-          </div>
+          )} */}
         </AccordionContent>
       </AccordionItem>
     </Accordion>
   );
-};
-
-export default MobileDash;
+}
+export default MobileAllData;
