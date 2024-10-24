@@ -29,11 +29,13 @@ const MobileDash = ({
       <AccordionItem value="item-1" className={cn("bg-white")}>
         <AccordionTrigger>
           <div className="flex items-center justify-between w-full px-3 ">
-            <span className="flex-1 text-left">{soin.hotel}</span>
-            <span className="flex-1 text-center">{soin.reception}</span>
+            <span className="flex-1 text-left text-[15px]">{soin.hotel}</span>
+            <span className="flex-1 text-center text-[15px] ">
+              {soin.reception}
+            </span>
             <span
               className={cn(
-                "flex-1 text-right",
+                "flex-1 text-right text-[15px]",
                 soin.paidBy ? "text-red-500" : "text-green-500"
               )}
             >
