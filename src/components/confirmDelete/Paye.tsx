@@ -12,35 +12,38 @@ import {
 import { Button } from "../ui/button";
 import { deleteNonPaye } from "@/src/actions/deleteAll";
 import toast from "react-hot-toast";
+import { cn } from "@/lib/utils";
+import { DashSoinShecmaType } from "@/src/schema/soinSchema";
 
-const ConfirmDeleteNonHotel = ({ setOpen }: { setOpen: any }) => {
-  const handleDeleteNonHotel = async () => {
-    await deleteNonPaye();
-    toast.success(
-      "Toutes les données de non-hôtel ont été supprimées avec succès. 🎉"
-    );
-    setOpen(false);
-  };
+type Props = {
+  soin: DashSoinShecmaType;
+  handlePay: (id: string) => void;
+};
+
+const Paye = ({ handlePay, soin }: Props) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button className="" variant={"destructive"}>
-          Supprimer Non hotel
+        <Button
+          className={cn(
+            "h-8 w-20 bg-green-700 hover:bg-green-800 border border-black rounded-none"
+          )}
+        >
+          Payer
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Etes-vous absolument sûr?</AlertDialogTitle>
           <AlertDialogDescription>
-            Si vous cliquez sur continuer, toutes les données de non-hôtel seront
-            supprimées!
+            Si vous cliquez sur continuer, {soin.hotel} sera payé!
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Annuler</AlertDialogCancel>
           <AlertDialogAction
-            onClick={handleDeleteNonHotel}
-            className="bg-red-500 hover:bg-red-600"
+            onClick={() => handlePay(soin.id)}
+            className="bg-green-600 hover:bg-green-700"
           >
             Continuer
           </AlertDialogAction>
@@ -50,4 +53,4 @@ const ConfirmDeleteNonHotel = ({ setOpen }: { setOpen: any }) => {
   );
 };
 
-export default ConfirmDeleteNonHotel;
+export default Paye;

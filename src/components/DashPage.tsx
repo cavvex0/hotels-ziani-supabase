@@ -10,6 +10,7 @@ import { CircleXIcon } from "lucide-react";
 import toast from "react-hot-toast";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import MobileDash from "./MobileDash";
+import Paye from "./confirmDelete/Paye";
 
 type Props = {
   soins: DashSoinShecmaType[];
@@ -147,14 +148,7 @@ const DashPage = ({ soins, emirates }: Props) => {
                   )}
                 </div>
                 <div className="flex items-center justify-center">
-                  <Button
-                    onClick={() => handlePay(soin.id)}
-                    className={cn(
-                      "h-8 w-20 bg-green-700 hover:bg-green-800 border border-black rounded-none"
-                    )}
-                  >
-                    Payer
-                  </Button>
+                  <Paye handlePay={handlePay} soin={soin} />
                 </div>
                 <div className="flex items-center justify-center">
                   <Button

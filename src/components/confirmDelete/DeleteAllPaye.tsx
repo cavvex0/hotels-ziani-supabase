@@ -30,7 +30,7 @@ const ConfirmDeleteAllPaye = ({ setOpen }: { setOpen: any }) => {
         <AlertDialogHeader>
           <AlertDialogTitle>Etes-vous absolument sûr?</AlertDialogTitle>
           <AlertDialogDescription>
-            Si vous cliquez sur continuer, toutes les réservations seront
+            Si vous cliquez sur continuer, toutes les données payées seront
             supprimées!
           </AlertDialogDescription>
         </AlertDialogHeader>
