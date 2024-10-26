@@ -9,10 +9,15 @@ const Dashboard = async () => {
   if (!user.data.user) {
     return redirect("/login");
   }
+  const { data: emirates } = await supabase
+    .from("soins")
+    .select("*")
+    .eq("hotel", "Emirates");
 
   const { data: soins } = await supabase
     .from("soins")
     .select("*")
+    .neq("hotel", "Emirates")
     .order("created_at", { ascending: true });
   const { data: hotels } = await supabase
     .from("hotels")
@@ -36,7 +41,7 @@ const Dashboard = async () => {
   return (
     <div className="flex flex-col gap-y-4 ">
       <AddSoin hotelsData={hotels} />
-      <DashPage soins={soins} />
+      <DashPage soins={soins} emirates={emirates} />
     </div>
   );
 };

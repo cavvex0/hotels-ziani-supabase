@@ -7,9 +7,10 @@ import AllDataHeader from "./AllDataHeader";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
-import { Button } from "./ui/button";
 import AllDataTable from "./AllDataTable";
 import MobileAllData from "./MobileAllData";
+import { deleteSoin, handlePaye } from "../actions/handleSoin";
+import toast from "react-hot-toast";
 
 type Props = {
   soins: DashSoinShecmaType[];
@@ -18,10 +19,10 @@ type Props = {
 };
 
 const AllDataPage = ({ hotels, soins, role }: Props) => {
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
   const [selectedHotel, setSelectedHotel] = useState("");
   const [receptionist, setReceptionist] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const isDesktop = useMediaQuery("(min-width: 1024px)");
   const [showpaidCheck, setShowpaidCheck] = useState(false);
 
   const filteredRows = soins.filter((row) => {
@@ -60,11 +61,40 @@ const AllDataPage = ({ hotels, soins, role }: Props) => {
     .map((soin) => soin.orient)
     .reduce((acc, curr) => acc + curr * 50, 0);
 
+  const handlePay = async (id: string) => {
+    try {
+      const response = await handlePaye(id);
+
+      if (!response?.success) {
+        toast.error(response?.message ?? "Erreur inconnue");
+        return;
+      }
+
+      toast.success("Payé avec succès");
+    } catch (error) {
+      toast.error("Erreur inconnue");
+    }
+  };
+  const handleDelete = async (id: string) => {
+    try {
+      const response = await deleteSoin(id);
+
+      if (!response?.success) {
+        toast.error(response?.message ?? "Erreur inconnue");
+        return;
+      }
+
+      toast.success("Annulé avec succès!");
+    } catch (error) {
+      toast.error("Erreur inconnue");
+    }
+  };
+
   return (
     <div className="flex flex-col gap-y-4">
       <div>
         <AllDataHeader
-          role="admins"
+          role={role}
           receptionist={receptionist}
           setReceptionist={setReceptionist}
           selectedHotel={selectedHotel}
@@ -72,7 +102,6 @@ const AllDataPage = ({ hotels, soins, role }: Props) => {
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}
           hotels={hotels}
-          soins={soins}
         />
       </div>
 
@@ -109,7 +138,13 @@ const AllDataPage = ({ hotels, soins, role }: Props) => {
               )}
             </div>
             {filteredRows.map((soin) => (
-              <AllDataTable soin={soin} key={soin.id} role={role} />
+              <AllDataTable
+                soin={soin}
+                key={soin.id}
+                role={role}
+                handlePay={handlePay}
+                handleDelete={handleDelete}
+              />
             ))}
             <div className="absolute bottom-[1.2rem] left-0 border-t w-full px-14 pt-5 flex justify-between gap-x-4">
               <div className="flex items-center gap-x-2">
@@ -144,7 +179,13 @@ const AllDataPage = ({ hotels, soins, role }: Props) => {
         <div>
           {/* mobile */}
           {filteredRows.map((soin) => (
-            <MobileAllData key={soin.id} soin={soin} />
+            <MobileAllData
+              key={soin.id}
+              soin={soin}
+              role={role}
+              handlePay={handlePay}
+              handleDelete={handleDelete}
+            />
           ))}
         </div>
       )}

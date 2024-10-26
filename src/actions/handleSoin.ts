@@ -51,7 +51,7 @@ export const handlePaye = async (id: string) => {
 
   await supabase
     .from("soins")
-    .update({ paidBy: username })
+    .update({ paidBy: username, paid: true })
     .eq("id", id)
     .select();
   revalidatePath("/dashboard");

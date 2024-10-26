@@ -2,7 +2,6 @@
 
 import { createClient } from "@/utils/supabase/server";
 import { encodedRedirect } from "@/utils/utils";
-import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { AuthSchemaType } from "../schema/authScherma";
 

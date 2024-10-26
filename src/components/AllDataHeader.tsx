@@ -6,13 +6,12 @@ import { Calendar } from "./ui/calendar";
 import React from "react";
 import { HotelsComboBox } from "./HotelsComboBox";
 import { ReceptionSchemaType } from "../schema/hotelSchema";
-import { SoinShecmaType } from "../schema/soinSchema";
 import { ReceptionsComboBox } from "./ReceptionsComboBox";
 import { format } from "date-fns";
+import DeleteAll from "./DeleteAll";
 type Props = {
   role: string;
   hotels: ReceptionSchemaType[];
-  soins: SoinShecmaType[];
   selectedHotel: any;
   setSelectedHotel: any;
   selectedDate: Date | null;
@@ -23,7 +22,6 @@ type Props = {
 const AllDataHeader = ({
   role,
   hotels,
-  soins,
   selectedHotel,
   setSelectedHotel,
   selectedDate,
@@ -106,6 +104,11 @@ const AllDataHeader = ({
           </Button>
         </div>
       </div>
+      {role === "admin" && (
+        <div className="flex items-center justify-center">
+          <DeleteAll />
+        </div>
+      )}
     </div>
   );
 };

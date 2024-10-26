@@ -11,6 +11,10 @@ import toast from "react-hot-toast";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import MobileDash from "./MobileDash";
 
+type Props = {
+  soins: DashSoinShecmaType[];
+  emirates: any;
+};
 
 const handleTaxiChange = (id: string) => {
   handleTaxi(id);
@@ -43,7 +47,8 @@ const handleDelete = async (id: string) => {
     toast.error("Erreur inconnue");
   }
 };
-const DashPage = ({ soins }: { soins: DashSoinShecmaType[] }) => {
+const DashPage = ({ soins, emirates }: Props) => {
+  console.log(emirates);
   const isDesktop = useMediaQuery("(min-width: 1024px)");
 
   const calcSalam = soins
@@ -177,6 +182,11 @@ const DashPage = ({ soins }: { soins: DashSoinShecmaType[] }) => {
                 <span className="mr-2 text-black">{calcOrient / 50}</span>
                 ORI : <span className="text-black">{calcOrient}</span> DH
               </p>
+              {emirates.length > 0 && (
+                <div>
+                  Emirates : <span className="text-red-500 ml-2">{emirates.length}</span>
+                </div>
+              )}
             </div>
           </div>
         </div>

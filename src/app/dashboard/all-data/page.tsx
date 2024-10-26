@@ -3,6 +3,15 @@ import { createClient } from "@/utils/supabase/server";
 
 const Page = async () => {
   const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  const { data: role } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", user?.id)
+    .single();
+  const roleName = role?.role;
 
   const { data: soins } = await supabase
     .from("soins")
@@ -19,7 +28,7 @@ const Page = async () => {
 
   return (
     <div className="">
-      <AllDataPage soins={soins} hotels={hotels} role="admin" />
+      <AllDataPage soins={soins} hotels={hotels} role={roleName} />
     </div>
   );
 };

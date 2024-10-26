@@ -2,13 +2,17 @@ import { format } from "date-fns";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { DashSoinShecmaType } from "../schema/soinSchema";
+import { CircleXIcon } from "lucide-react";
 
 type Props = {
   soin: DashSoinShecmaType;
   role: string;
+  handlePay: (id: string) => void;
+  handleDelete: (id: string) => void;
 };
 
-const AllDataTable = ({ soin, role }: Props) => {
+
+const AllDataTable = ({ soin, role, handlePay, handleDelete }: Props) => {
   return (
     <div
       className={cn(
@@ -64,7 +68,7 @@ const AllDataTable = ({ soin, role }: Props) => {
       </div>
       <div className="flex items-center justify-center">
         <Button
-          // onClick={() => handlePay(data.id, data.paidBy)}
+          onClick={() => handlePay(soin.id)}
           className={cn(
             "h-8 w-20 bg-green-700 hover:bg-green-800 border border-black rounded-none"
           )}
@@ -72,6 +76,17 @@ const AllDataTable = ({ soin, role }: Props) => {
           Payer
         </Button>
       </div>
+      {role === "admin" && (
+        <div className="flex items-center justify-center">
+          <Button
+            onClick={() => handleDelete(soin.id)}
+            size="icon"
+            variant="cancel"
+          >
+            <CircleXIcon />
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

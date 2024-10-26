@@ -12,15 +12,20 @@ import { format } from "date-fns";
 
 type Props = {
   soin: DashSoinShecmaType;
+  handlePay: (id: string) => void;
+  handleDelete: (id: string) => void;
+  role: string;
 };
-function MobileAllData({ soin }: Props) {
+function MobileAllData({ soin, handlePay, role, handleDelete }: Props) {
   return (
     <Accordion type="single" collapsible>
       <AccordionItem value="item-1" className={cn("bg-white")}>
         <AccordionTrigger>
           <div className="flex items-center justify-between w-full px-3 ">
             <span className="flex-1 text-left text-[15px]">{soin.hotel}</span>
-            <span className="flex-1 text-center text-[15px]">{soin.reception}</span>
+            <span className="flex-1 text-center text-[15px]">
+              {soin.reception}
+            </span>
             <span
               className={cn(
                 "flex-1 text-right text-[15px]",
@@ -45,7 +50,9 @@ function MobileAllData({ soin }: Props) {
                 {soin.orient}
               </span>
             </div>
-            <span>{format(new Date(soin.created_at), "dd/MM/yyyy  HH:mm")}</span>
+            <span>
+              {format(new Date(soin.created_at), "dd/MM/yyyy  HH:mm")}
+            </span>
             {soin.taxi && (
               <span className="bg-yellow-400 px-3 border border-black">
                 Taxi
@@ -72,7 +79,7 @@ function MobileAllData({ soin }: Props) {
           </div>
           <div>
             <Button
-              //   onClick={() => handlePay(soin.id, soin.paidBy)}
+              onClick={() => handlePay(soin.id)}
               className={cn(
                 "h-7 w-15 text-sm bg-green-700 hover:bg-green-800 border border-black rounded-none"
               )}
@@ -80,17 +87,17 @@ function MobileAllData({ soin }: Props) {
               Payer
             </Button>
           </div>
-          {/* {role === "admin" && (
+          {role === "admin" && (
             <div>
               <Button
-                // onClick={() => handleDelete(soin.id)}
+                onClick={() => handleDelete(soin.id)}
                 size="icon"
                 variant="cancel"
               >
                 <CircleXIcon />
               </Button>
             </div>
-          )} */}
+          )}
         </AccordionContent>
       </AccordionItem>
     </Accordion>
