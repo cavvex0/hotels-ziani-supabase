@@ -8,18 +8,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
-import { deleteAllPaye, deleteNonPaye } from "../actions/deleteAll";
+import ConfirmDeleteAllPaye from "./confirmDelete/DeleteAllPaye";
+import ConfirmDeleteNonHotel from "./confirmDelete/DeleteNonHotel";
+import { useState } from "react";
 
 function DeleteAll() {
-  const handleDeleteNonHotel = async () => {
-    await deleteNonPaye();
-  };
-
-  const handleDeletePaye = async () => {
-    await deleteAllPaye();
-  };
+  const [open, setOpen] = useState(false);
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button className="w-full" variant="destructive">
           Attention!
@@ -29,29 +25,10 @@ function DeleteAll() {
         <DialogHeader>
           <DialogTitle>Are you absolutely sure?</DialogTitle>
           <DialogDescription asChild>
-            <div className="mt-9 flex flex-col gap-y-7">
-              <div className=" flex items-center justify-between">
-                <h1 className="lg:text-[18px] text-black">
-                  Supprimer Non hotel
-                </h1>
-                <MoveRightIcon />
-                <Button
-                  onClick={() => handleDeleteNonHotel()}
-                  variant="destructive"
-                >
-                  Supprimer tout !
-                </Button>
-              </div>
-              <div className="flex items-center justify-between">
-                <h1 className="lg:text-[18px] text-black">Supprimer payé</h1>
-                <MoveRightIcon />
-                <Button
-                  onClick={() => handleDeletePaye()}
-                  variant="destructive"
-                >
-                  Supprimer tout !
-                </Button>
-              </div>
+            <div className="flex items-center justify-between pt-4">
+              <ConfirmDeleteAllPaye setOpen={setOpen} />
+              <MoveRightIcon />
+              <ConfirmDeleteNonHotel setOpen={setOpen} />
             </div>
           </DialogDescription>
         </DialogHeader>

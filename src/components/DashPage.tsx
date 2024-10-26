@@ -184,7 +184,8 @@ const DashPage = ({ soins, emirates }: Props) => {
               </p>
               {emirates.length > 0 && (
                 <div>
-                  Emirates : <span className="text-red-500 ml-2">{emirates.length}</span>
+                  Emirates :{" "}
+                  <span className="text-red-500 ml-2">{emirates.length}</span>
                 </div>
               )}
             </div>

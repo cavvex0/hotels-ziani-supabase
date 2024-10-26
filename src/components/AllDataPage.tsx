@@ -16,9 +16,10 @@ type Props = {
   soins: DashSoinShecmaType[];
   hotels: ReceptionSchemaType[];
   role: string;
+  emirates: any;
 };
 
-const AllDataPage = ({ hotels, soins, role }: Props) => {
+const AllDataPage = ({ hotels, soins, role, emirates }: Props) => {
   const isDesktop = useMediaQuery("(min-width: 1024px)");
   const [selectedHotel, setSelectedHotel] = useState("");
   const [receptionist, setReceptionist] = useState("");
@@ -159,6 +160,12 @@ const AllDataPage = ({ hotels, soins, role }: Props) => {
                 </p>
               </div>
               <div className="flex items-center gap-x-9 font-realce text-xl">
+                {emirates.length > 0 && (
+                  <div>
+                    Emirates :{" "}
+                    <span className="text-red-500 ml-2">{emirates.length}</span>
+                  </div>
+                )}
                 <p className="text-blue-500">
                   <span className="mr-2 text-black">{calcSalam / 50}</span>
                   SAL : <span className="text-black">{calcSalam}</span> DH
