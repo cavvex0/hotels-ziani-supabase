@@ -10,8 +10,6 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "../ui/button";
-import { deleteNonPaye } from "@/src/actions/deleteAll";
-import toast from "react-hot-toast";
 import { cn } from "@/lib/utils";
 import { DashSoinShecmaType } from "@/src/schema/soinSchema";
 

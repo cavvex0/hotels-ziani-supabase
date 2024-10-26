@@ -9,6 +9,7 @@ import { Button } from "./ui/button";
 import { CircleXIcon } from "lucide-react";
 import { DashSoinShecmaType } from "../schema/soinSchema";
 import { format } from "date-fns";
+import Paye from "./confirmDelete/Paye";
 
 type Props = {
   soin: DashSoinShecmaType;
@@ -78,14 +79,7 @@ function MobileAllData({ soin, handlePay, role, handleDelete }: Props) {
             )}
           </div>
           <div>
-            <Button
-              onClick={() => handlePay(soin.id)}
-              className={cn(
-                "h-7 w-15 text-sm bg-green-700 hover:bg-green-800 border border-black rounded-none"
-              )}
-            >
-              Payer
-            </Button>
+            <Paye soin={soin} handlePay={handlePay} />
           </div>
           {role === "admin" && (
             <div>

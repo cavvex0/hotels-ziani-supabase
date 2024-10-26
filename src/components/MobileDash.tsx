@@ -10,6 +10,7 @@ import { Button } from "./ui/button";
 import { CircleXIcon } from "lucide-react";
 import { format } from "date-fns";
 import { Switch } from "./ui/switch";
+import Paye from "./confirmDelete/Paye";
 
 type Props = {
   soin: DashSoinShecmaType;
@@ -88,14 +89,7 @@ const MobileDash = ({
               )}
             </div>
             <div>
-              <Button
-                onClick={() => handlePay(soin.id)}
-                className={cn(
-                  "h-7 w-15 text-sm bg-green-700 hover:bg-green-800 border border-black rounded-none"
-                )}
-              >
-                Payer
-              </Button>
+              <Paye handlePay={handlePay} soin={soin} />
             </div>
             <div>
               <Button

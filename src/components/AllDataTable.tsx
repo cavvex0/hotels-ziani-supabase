@@ -3,6 +3,7 @@ import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { DashSoinShecmaType } from "../schema/soinSchema";
 import { CircleXIcon } from "lucide-react";
+import Paye from "./confirmDelete/Paye";
 
 type Props = {
   soin: DashSoinShecmaType;
@@ -67,14 +68,7 @@ const AllDataTable = ({ soin, role, handlePay, handleDelete }: Props) => {
         )}
       </div>
       <div className="flex items-center justify-center">
-        <Button
-          onClick={() => handlePay(soin.id)}
-          className={cn(
-            "h-8 w-20 bg-green-700 hover:bg-green-800 border border-black rounded-none"
-          )}
-        >
-          Payer
-        </Button>
+        <Paye soin={soin} handlePay={handlePay} />
       </div>
       {role === "admin" && (
         <div className="flex items-center justify-center">
