@@ -59,3 +59,9 @@ export const handlePaye = async (id: string) => {
     success: true,
   };
 };
+
+export const adminCanDelete = async (id: string) => {
+  const supabase = createClient();
+  await supabase.from("soins").delete().eq("id", id);
+  revalidatePath("/dashboard");
+};

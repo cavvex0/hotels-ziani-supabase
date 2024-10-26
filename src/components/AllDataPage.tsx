@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import AllDataTable from "./AllDataTable";
 import MobileAllData from "./MobileAllData";
-import { deleteSoin, handlePaye } from "../actions/handleSoin";
+import { adminCanDelete, deleteSoin, handlePaye } from "../actions/handleSoin";
 import toast from "react-hot-toast";
 
 type Props = {
@@ -77,18 +77,8 @@ const AllDataPage = ({ hotels, soins, role, emirates }: Props) => {
     }
   };
   const handleDelete = async (id: string) => {
-    try {
-      const response = await deleteSoin(id);
-
-      if (!response?.success) {
-        toast.error(response?.message ?? "Erreur inconnue");
-        return;
-      }
-
-      toast.success("Annulé avec succès!");
-    } catch (error) {
-      toast.error("Erreur inconnue");
-    }
+    adminCanDelete(id);
+    toast.success("supprimer avec succès.");
   };
 
   return (

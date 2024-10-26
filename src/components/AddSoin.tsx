@@ -111,6 +111,13 @@ const AddSoin = ({ hotelsData }: Props) => {
       toast.error("Veuillez sélectionner une réception");
       return;
     }
+    if (
+      bain.istanbul * 50 + bain.orient * 50 + bain.salam * 50 !== price &&
+      price !== 0
+    ) {
+      toast.error("Appelle Adam pour expliquer l'erreur!");
+      return;
+    }
     mutate(values);
     toast.success("Soin ajouté avec succès");
   };
