@@ -1,12 +1,22 @@
 import AllDataPage from "@/src/components/AllDataPage";
 import { createClient } from "@/utils/supabase/server";
+import { format } from "date-fns";
 
 const Page = async () => {
   const supabase = createClient();
+  const date = format(new Date(), "yyyy-MM-dd");
   const { data: emirates } = await supabase
     .from("soins")
     .select("*")
-    .eq("hotel", "Emirates");
+    .eq("hotel", "Emirates")
+    .gte("created_at", date)
+    .lt(
+      "created_at",
+      format(
+        new Date(new Date().setDate(new Date().getDate() + 1)),
+        "yyyy-MM-dd"
+      )
+    );
   const {
     data: { user },
   } = await supabase.auth.getUser();

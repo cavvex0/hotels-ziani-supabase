@@ -176,7 +176,7 @@ const DashPage = ({ soins, emirates }: Props) => {
                 <span className="mr-2 text-black">{calcOrient / 50}</span>
                 ORI : <span className="text-black">{calcOrient}</span> DH
               </p>
-              {emirates.length > 0 && (
+              {emirates && emirates.length > 0 && (
                 <div>
                   Emirates :{" "}
                   <span className="text-red-500 ml-2">{emirates.length}</span>

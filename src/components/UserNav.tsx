@@ -17,7 +17,6 @@ import BoyImg from "@/assets/user.png";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
 import { signOutAction } from "../actions/signOut";
-import { set } from "date-fns";
 
 type Nav = {
   label: string;

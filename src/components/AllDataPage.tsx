@@ -160,7 +160,7 @@ const AllDataPage = ({ hotels, soins, role, emirates }: Props) => {
                 </p>
               </div>
               <div className="flex items-center gap-x-9 font-realce text-xl">
-                {emirates.length > 0 && (
+                {emirates && emirates.length > 0 && (
                   <div>
                     Emirates :{" "}
                     <span className="text-red-500 ml-2">{emirates.length}</span>
