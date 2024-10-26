@@ -49,8 +49,9 @@ const handleDelete = async (id: string) => {
   }
 };
 const DashPage = ({ soins, emirates }: Props) => {
-  console.log(emirates);
   const isDesktop = useMediaQuery("(min-width: 1024px)");
+  const filterNonEmirates = soins.filter((row) => row.hotel !== "Emirates");
+  const filterEmirates = soins.filter((row) => row.hotel == "Emirates");
 
   const calcSalam = soins
     .filter((row) => row.price)
@@ -87,7 +88,7 @@ const DashPage = ({ soins, emirates }: Props) => {
             <div className="flex items-center justify-center">Action</div>
             <div className="flex items-center justify-center">Annuler</div>
           </div>
-          {soins.map((soin) => {
+          {filterNonEmirates.map((soin) => {
             return (
               <div
                 className="grid grid-cols-12 px-4 border-b py-3 text-sm hover:bg-gray-100"
@@ -176,7 +177,7 @@ const DashPage = ({ soins, emirates }: Props) => {
                 <span className="mr-2 text-black">{calcOrient / 50}</span>
                 ORI : <span className="text-black">{calcOrient}</span> DH
               </p>
-              {emirates && emirates.length > 0 && (
+              {filterEmirates && filterEmirates.length > 0 && (
                 <div>
                   Emirates :{" "}
                   <span className="text-red-500 ml-2">{emirates.length}</span>

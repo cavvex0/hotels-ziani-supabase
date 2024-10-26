@@ -20,6 +20,7 @@ const Page = async () => {
   const {
     data: { user },
   } = await supabase.auth.getUser();
+  
   const { data: role } = await supabase
     .from("profiles")
     .select("role")

@@ -26,6 +26,13 @@ const AllDataPage = ({ hotels, soins, role, emirates }: Props) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [showpaidCheck, setShowpaidCheck] = useState(false);
 
+  const filterEmirates = soins.filter((row) =>
+    row.hotel === "Emirates" && selectedDate
+      ? format(new Date(row.created_at), "dd/MM/yyyy") ===
+        format(new Date(selectedDate), "dd/MM/yyyy")
+      : null
+  );
+
   const filteredRows = soins.filter((row) => {
     const isDateMatch =
       !selectedDate ||
@@ -150,7 +157,7 @@ const AllDataPage = ({ hotels, soins, role, emirates }: Props) => {
                 </p>
               </div>
               <div className="flex items-center gap-x-9 font-realce text-xl">
-                {emirates && emirates.length > 0 && (
+                {filterEmirates && filterEmirates.length > 0 && (
                   <div>
                     Emirates :{" "}
                     <span className="text-red-500 ml-2">{emirates.length}</span>

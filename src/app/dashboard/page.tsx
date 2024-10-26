@@ -27,7 +27,6 @@ const Dashboard = async () => {
   const { data: soins } = await supabase
     .from("soins")
     .select("*")
-    .neq("hotel", "Emirates")
     .order("created_at", { ascending: true });
   const { data: hotels } = await supabase
     .from("hotels")

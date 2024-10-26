@@ -60,7 +60,6 @@ const Navbar = () => {
             );
           })}
         </div>
-
         <UserNav navLink={navLink} />
       </div>
     </div>

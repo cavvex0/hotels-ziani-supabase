@@ -58,7 +58,13 @@ const AllDataHeader = ({
               mode="single"
               initialFocus
               selected={selectedDate || new Date()}
-              onSelect={setSelectedDate}
+              onSelect={(date) => {
+                if (date?.toDateString() === selectedDate?.toDateString()) {
+                  setSelectedDate(new Date());
+                } else {
+                  setSelectedDate(date);
+                }
+              }}
             />
           </PopoverContent>
         </Popover>
