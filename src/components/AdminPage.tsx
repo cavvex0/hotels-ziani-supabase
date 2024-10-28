@@ -89,12 +89,12 @@ const AdminPage = ({ users }: Props) => {
             />
             {showPassword ? (
               <EyeIcon
-                className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-gray-700"
+                className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer text-gray-700 h-full "
                 onClick={() => setShowPassword(false)}
               />
             ) : (
               <EyeOff
-                className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-gray-700"
+                className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer text-gray-700 h-full"
                 onClick={() => setShowPassword(true)}
               />
             )}

@@ -29,7 +29,7 @@ const Page = async () => {
   }
 
   return (
-    <div className="">
+    <div className="min-h-screen">
       <AllDataPage
         soins={soins}
         hotels={hotels}
