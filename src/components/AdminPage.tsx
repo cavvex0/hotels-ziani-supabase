@@ -57,7 +57,7 @@ const AdminPage = ({ users }: Props) => {
         </div>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex-1 h-full w-full flex flex-col items-center justify-center p-8 gap-y-4"
+          className="flex-1 h-full w-full flex flex-col items-center justify-center p-8 gap-y-4 "
         >
           <Input
             placeholder="Name..."
