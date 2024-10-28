@@ -11,22 +11,20 @@ import AllDataTable from "./AllDataTable";
 import MobileAllData from "./MobileAllData";
 import { adminCanDelete, handlePaye } from "../actions/handleSoin";
 import toast from "react-hot-toast";
+import { Checkbox } from "./ui/checkbox";
 
 type Props = {
   soins: DashSoinShecmaType[];
   hotels: ReceptionSchemaType[];
   role: string;
-
 };
 
 const AllDataPage = ({ hotels, soins, role }: Props) => {
   const isDesktop = useMediaQuery("(min-width: 1024px)");
   const [selectedHotel, setSelectedHotel] = useState("");
   const [receptionist, setReceptionist] = useState("");
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [showpaidCheck, setShowpaidCheck] = useState(false);
-
-
 
   const filterEmirates = soins.filter((row) =>
     row.hotel === "Emirates" && selectedDate
@@ -104,9 +102,26 @@ const AllDataPage = ({ hotels, soins, role }: Props) => {
           hotels={hotels}
         />
       </div>
-
+      <div className="flex items-center justify-end space-x-2">
+        <Checkbox
+          id="terms2"
+          checked={showpaidCheck}
+          onCheckedChange={() => {
+            setShowpaidCheck(!showpaidCheck);
+            showpaidCheck
+              ? setSelectedDate(new Date())
+              : setSelectedDate(null);
+          }}
+        />
+        <label
+          htmlFor="terms2"
+          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+        >
+          Afficher tout Payant
+        </label>
+      </div>
       {isDesktop ? (
-        <div className="py-9 hidden lg:block">
+        <div className="pb-9 hidden lg:block">
           <div
             className={cn(
               "bg-white min-h-[500px] rounded-[37px] shadoww border border-gray-300 relative pb-[4rem]"
@@ -162,7 +177,9 @@ const AllDataPage = ({ hotels, soins, role }: Props) => {
                 {filterEmirates && filterEmirates.length > 0 && (
                   <div>
                     Emirates :{" "}
-                    <span className="text-red-500 ml-2">{filterEmirates.length}</span>
+                    <span className="text-red-500 ml-2">
+                      {filterEmirates.length}
+                    </span>
                   </div>
                 )}
                 <p className="text-blue-500">

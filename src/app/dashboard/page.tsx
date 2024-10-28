@@ -7,23 +7,9 @@ import { redirect } from "next/navigation";
 const Dashboard = async () => {
   const supabase = createClient();
   const user = await supabase.auth.getUser();
-  console.log(user)
   if (!user.data.user) {
     return redirect("/login");
   }
-  const date = format(new Date(), "yyyy-MM-dd");
-  const { data: emirates } = await supabase
-    .from("soins")
-    .select("*")
-    .eq("hotel", "Emirates")
-    .gte("created_at", date)
-    .lt(
-      "created_at",
-      format(
-        new Date(new Date().setDate(new Date().getDate() + 1)),
-        "yyyy-MM-dd"
-      )
-    );
 
   const { data: soins } = await supabase
     .from("soins")

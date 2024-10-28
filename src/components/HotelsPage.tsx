@@ -84,7 +84,7 @@ const HotelsPage = ({ hotels }: { hotels: ReceptionSchemaType[] }) => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-9 lg:gap-20 w-full">
-      <div className="bg-white shadow rounded-[35px] lg:h-[500px] p-9 border border-gray-300">
+      <div className="bg-white shadow rounded-[35px] lg:h-[500px] p-5 lg:p-9 border border-gray-300">
         <form
           onSubmit={formHotel.handleSubmit(onSubmitHotel)}
           className="flex flex-col items-center justify-center h-full gap-4"

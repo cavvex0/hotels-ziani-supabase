@@ -19,7 +19,7 @@ type Props = {
 };
 function MobileAllData({ soin, handlePay, role, handleDelete }: Props) {
   return (
-    <Accordion type="single" collapsible>
+    <Accordion type="single" collapsible className="border-b border-black">
       <AccordionItem value="item-1" className={cn("bg-white")}>
         <AccordionTrigger>
           <div className="flex items-center justify-between w-full px-3 ">
@@ -72,12 +72,12 @@ function MobileAllData({ soin, handlePay, role, handleDelete }: Props) {
           ) : (
             <span>Pas encore payé</span>
           )}
-          <div className="flex items-center gap-x-2">
-            <span>le</span>
-            {soin.paidBy && (
+          {soin.paidBy && (
+            <div className="flex items-center gap-x-2">
+              <span>le</span>
               <div>{format(new Date(soin.updated_at), "dd/MM/yyyy")}</div>
-            )}
-          </div>
+            </div>
+          )}
           <div>
             <Paye soin={soin} handlePay={handlePay} />
           </div>

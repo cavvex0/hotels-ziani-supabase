@@ -26,7 +26,7 @@ const MobileDash = ({
   handleDelete,
 }: Props) => {
   return (
-    <Accordion type="single" collapsible>
+    <Accordion type="single" collapsible className="border-b border-black">
       <AccordionItem value="item-1" className={cn("bg-white")}>
         <AccordionTrigger>
           <div className="flex items-center justify-between w-full px-3 ">

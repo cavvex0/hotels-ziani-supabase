@@ -58,6 +58,8 @@ const AdminPage = ({ users }: Props) => {
 
   const deleteUSer = async (id: string) => {
     deleteUser(id);
+    toast.success("Utilisateur supprimé avec succès.");
+
   };
 
   return (

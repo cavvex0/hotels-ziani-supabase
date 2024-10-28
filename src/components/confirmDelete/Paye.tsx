@@ -12,6 +12,7 @@ import {
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { DashSoinShecmaType } from "@/src/schema/soinSchema";
+import { useMediaQuery } from "@/hooks/use-media-query";
 
 type Props = {
   soin: DashSoinShecmaType;
@@ -19,12 +20,14 @@ type Props = {
 };
 
 const Paye = ({ handlePay, soin }: Props) => {
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button
           className={cn(
-            "h-8 w-20 bg-green-700 hover:bg-green-800 border border-black rounded-none"
+            " bg-green-700 hover:bg-green-800 border border-black rounded-none",
+            isDesktop ? "h-8 w-20" : "h-7 w-16"
           )}
         >
           Payer
