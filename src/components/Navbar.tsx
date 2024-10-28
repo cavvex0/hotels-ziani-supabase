@@ -3,7 +3,7 @@ import { cn } from "@/utils/cn";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import UserNav from "./UserNav";
-import { getRole, getUsername } from "@/lib/getUserClient";
+import { getRole } from "@/lib/getUserClient";
 import { useEffect, useState } from "react";
 
 const Navbar = () => {
@@ -39,7 +39,7 @@ const Navbar = () => {
     navLink.pop();
   }
   return (
-    <div className="bg-prime h-[6rem] w-screen">
+    <div className="bg-prime h-[6rem]">
       <div className="max-w-7xl mx-auto flex items-center justify-between h-full text-white px-6 xl:p-0 w-full ">
         <Link href={"/"} className="font-realce text-4xl ">
           <span className="text-orange-600">Z</span>IANI

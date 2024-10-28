@@ -50,7 +50,7 @@ const Dashboard = async () => {
   return (
     <div className="flex flex-col gap-y-4 ">
       <AddSoin hotelsData={hotels} />
-      <DashPage soins={soins} emirates={emirates} />
+      <DashPage soins={soins} />
     </div>
   );
 };

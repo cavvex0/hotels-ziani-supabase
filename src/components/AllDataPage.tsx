@@ -9,22 +9,24 @@ import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import AllDataTable from "./AllDataTable";
 import MobileAllData from "./MobileAllData";
-import { adminCanDelete, deleteSoin, handlePaye } from "../actions/handleSoin";
+import { adminCanDelete, handlePaye } from "../actions/handleSoin";
 import toast from "react-hot-toast";
 
 type Props = {
   soins: DashSoinShecmaType[];
   hotels: ReceptionSchemaType[];
   role: string;
-  emirates: any;
+
 };
 
-const AllDataPage = ({ hotels, soins, role, emirates }: Props) => {
+const AllDataPage = ({ hotels, soins, role }: Props) => {
   const isDesktop = useMediaQuery("(min-width: 1024px)");
   const [selectedHotel, setSelectedHotel] = useState("");
   const [receptionist, setReceptionist] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [showpaidCheck, setShowpaidCheck] = useState(false);
+
+
 
   const filterEmirates = soins.filter((row) =>
     row.hotel === "Emirates" && selectedDate
@@ -160,7 +162,7 @@ const AllDataPage = ({ hotels, soins, role, emirates }: Props) => {
                 {filterEmirates && filterEmirates.length > 0 && (
                   <div>
                     Emirates :{" "}
-                    <span className="text-red-500 ml-2">{emirates.length}</span>
+                    <span className="text-red-500 ml-2">{filterEmirates.length}</span>
                   </div>
                 )}
                 <p className="text-blue-500">

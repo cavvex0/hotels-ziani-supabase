@@ -14,7 +14,7 @@ import Paye from "./confirmDelete/Paye";
 
 type Props = {
   soins: DashSoinShecmaType[];
-  emirates: any;
+
 };
 
 const handleTaxiChange = (id: string) => {
@@ -48,7 +48,7 @@ const handleDelete = async (id: string) => {
     toast.error("Erreur inconnue");
   }
 };
-const DashPage = ({ soins, emirates }: Props) => {
+const DashPage = ({ soins }: Props) => {
   const isDesktop = useMediaQuery("(min-width: 1024px)");
   const filterNonEmirates = soins.filter((row) => row.hotel !== "Emirates");
   const filterEmirates = soins.filter((row) => row.hotel == "Emirates");
@@ -180,7 +180,7 @@ const DashPage = ({ soins, emirates }: Props) => {
               {filterEmirates && filterEmirates.length > 0 && (
                 <div>
                   Emirates :{" "}
-                  <span className="text-red-500 ml-2">{emirates.length}</span>
+                  <span className="text-red-500 ml-2">{filterEmirates.length}</span>
                 </div>
               )}
             </div>
