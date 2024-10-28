@@ -190,7 +190,7 @@ const DashPage = ({ soins }: Props) => {
     );
   } else {
     return (
-      <div className="px-1">
+      <div className="px-1 pb-9">
         {soins.map((soin) => (
           <MobileDash
             key={soin.id}
