@@ -108,9 +108,7 @@ const AllDataPage = ({ hotels, soins, role }: Props) => {
           checked={showpaidCheck}
           onCheckedChange={() => {
             setShowpaidCheck(!showpaidCheck);
-            showpaidCheck
-              ? setSelectedDate(new Date())
-              : setSelectedDate(null);
+            showpaidCheck ? setSelectedDate(new Date()) : setSelectedDate(null);
           }}
         />
         <label
@@ -210,6 +208,37 @@ const AllDataPage = ({ hotels, soins, role }: Props) => {
               handleDelete={handleDelete}
             />
           ))}
+          <div className="flex items-center justify-center py-9">
+            <div className="flex flex-col-reverse items-center justify-center gap-x-4">
+              <div className="flex items-center gap-x-2">
+                <p className=" uppercase font-realce text-[17px] ">
+                  Total Payéé :{" "}
+                  <span className="text-red-500">{totalPayé}</span> DHs
+                </p>
+                <div className=" w-[2px] h-6 lg:w-1 lg:h-7 bg-orange-500 rounded-full" />
+                <p className=" uppercase font-realce text-[17px] ">
+                  Total Non Payéé :{" "}
+                  <span className="text-green-500">{totalNonPayé}</span> DHs
+                </p>
+              </div>
+              <div className="py-5">
+                <div className="flex gap-x-9 font-realce text-[16px]">
+                  <p className="text-blue-500">
+                    <span className="mr-2 text-black">{calcSalam / 50}</span>
+                    SAL : <span className="text-black">{calcSalam}</span> DH
+                  </p>
+                  <p className="text-green-500">
+                    <span className="mr-2 text-black">{calcIstanbul / 50}</span>
+                    IST : <span className="text-black">{calcIstanbul}</span> DH
+                  </p>
+                  <p className="text-rose-500">
+                    <span className="mr-2 text-black">{calcOrient / 50}</span>
+                    ORI : <span className="text-black">{calcOrient}</span> DH
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>
