@@ -1,5 +1,6 @@
 "use client";
 import { createClient } from "@/utils/supabase/client";
+import { redirect } from "next/navigation";
 
 export const getUsername = async () => {
   const supabaseClient = createClient();
@@ -7,13 +8,18 @@ export const getUsername = async () => {
     data: { user },
     error,
   } = await supabaseClient.auth.getUser();
+  console.log(user)
 
   if (error) {
     console.error("Error fetching user:", error.message);
     return null;
   }
 
-  return user?.user_metadata?.username || null;
+  if (!user) {
+    return redirect("/");
+  }
+
+  return user?.user_metadata?.username || redirect("/");
 };
 export const getRole = async () => {
   const supabaseClient = createClient();
@@ -32,5 +38,5 @@ export const getRole = async () => {
     return null;
   }
 
-  return role || null;
+  return role || redirect("/");
 };

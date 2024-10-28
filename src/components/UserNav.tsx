@@ -14,8 +14,6 @@ import React, { useEffect, useState } from "react";
 import { getRole, getUsername } from "@/lib/getUserClient";
 import GirlImg from "@/assets/user-female.png";
 import BoyImg from "@/assets/user.png";
-import { createClient } from "@/utils/supabase/client";
-import { useRouter } from "next/navigation";
 import { signOutAction } from "../actions/signOut";
 
 type Nav = {
@@ -28,8 +26,6 @@ export default function UserNav({ navLink }: { navLink: Nav }) {
   const [role, setRole] = useState("");
   const [open, setOpen] = useState(false);
   const [isReady, setIsReady] = useState(true);
-  const supabase = createClient();
-  const router = useRouter();
 
   const fetchUsername = async () => {
     const name = await getUsername();

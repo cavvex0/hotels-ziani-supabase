@@ -16,6 +16,8 @@ import {
   SelectValue,
 } from "./ui/select";
 import toast from "react-hot-toast";
+import { useMutation } from "@tanstack/react-query";
+import { signOutAction } from "../actions/signOut";
 
 const roles = ["admin", "receptionist"];
 
@@ -33,13 +35,25 @@ const AdminPage = ({ users }: Props) => {
     },
   });
 
-  const onSubmit = async (values: AdminSchemaType) => {
-    const response = await createUser(values);
+  const { mutate, isPending } = useMutation({
+    mutationKey: ["create_user"],
+    mutationFn: createUser,
+    onSuccess: async (data) => {
+      if (data?.success) {
+        toast.success("Utilisateur créé avec succès!");
+        await signOutAction();
+      } else {
+        toast.error("l'utilisateur existe déjà!");
+      }
+    },
+  });
 
-    if (!response?.success) {
-      toast.error(response?.message ?? "user already exists!");
+  const onSubmit = (values: AdminSchemaType) => {
+    if (!values.name || !values.password || !values.role) {
+      toast.error("Veuillez remplir tous les champs");
       return;
     }
+    mutate(values);
   };
 
   const deleteUSer = async (id: string) => {
@@ -97,7 +111,9 @@ const AdminPage = ({ users }: Props) => {
               })}
             </SelectContent>
           </Select>
-          <Button className="w-full">Add</Button>
+          <Button className="w-full" disabled={isPending}>
+            {isPending ? "Ajout en cours..." : "Ajouter"}
+          </Button>
         </form>
         <div className="flex-1 h-full w-full">
           <div className="flex justify-center flex-col h-full px-8 gap-3">

@@ -7,6 +7,7 @@ import { redirect } from "next/navigation";
 const Dashboard = async () => {
   const supabase = createClient();
   const user = await supabase.auth.getUser();
+  console.log(user)
   if (!user.data.user) {
     return redirect("/login");
   }
