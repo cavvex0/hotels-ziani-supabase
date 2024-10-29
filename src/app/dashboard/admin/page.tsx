@@ -1,7 +1,7 @@
-import AdminPage from "@/src/components/AdminPage";
+import AdminPage from "@/src/sections/AdminPage";
 import { createClient } from "@/utils/supabase/server";
 
-const Page = async() => {
+const Page = async () => {
   const supabase = createClient();
   const { data: users } = await supabase.from("profiles").select("*");
 

@@ -2,13 +2,13 @@
 
 import { format } from "date-fns";
 import { DashSoinShecmaType } from "../schema/soinSchema";
-import { Switch } from "./ui/switch";
+import { Switch } from "../components/ui/switch";
 import { deleteSoin, handlePaye, handleTaxi } from "../actions/handleSoin";
 import toast from "react-hot-toast";
 import { useMediaQuery } from "@/hooks/use-media-query";
-import MobileDash from "./MobileDash";
-import Paye from "./confirmDelete/Paye";
-import Cancel from "./confirmDelete/Cancel";
+import MobileDash from "../components/MobileDash";
+import Paye from "../components/confirmDelete/Paye";
+import Cancel from "../components/confirmDelete/Cancel";
 import { cn } from "@/lib/utils";
 import { getColorByUser } from "@/hooks/useColor";
 

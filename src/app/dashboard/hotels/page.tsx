@@ -1,4 +1,5 @@
-import HotelsPage from "@/src/components/HotelsPage";
+
+import HotelsPage from "@/src/sections/HotelsPage";
 import { createClient } from "@/utils/supabase/server";
 
 const Page = async () => {

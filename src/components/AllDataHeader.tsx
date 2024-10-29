@@ -8,7 +8,7 @@ import { HotelsComboBox } from "./HotelsComboBox";
 import { ReceptionSchemaType } from "../schema/hotelSchema";
 import { ReceptionsComboBox } from "./ReceptionsComboBox";
 import { format } from "date-fns";
-import DeleteAll from "./DeleteAll";
+import DeleteAll from "./confirmDelete/DeleteAll";
 type Props = {
   role: string;
   hotels: ReceptionSchemaType[];

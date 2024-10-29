@@ -1,8 +1,8 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
+import { Button } from "@/components/ui/button";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   HotelSchema,
@@ -10,11 +10,13 @@ import {
   ReceptionSchemaType,
 } from "../schema/hotelSchema";
 import { useMutation } from "@tanstack/react-query";
-import { createHotel } from "../actions/createHotel";
-import { HotelsComboBox } from "./HotelsComboBox";
+import { createHotel } from "@/src/actions/createHotel";
+
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { Input } from "@/src/components/ui/input";
+import { HotelsComboBox } from "@/src/components/HotelsComboBox";
 
 const HotelsPage = ({ hotels }: { hotels: ReceptionSchemaType[] }) => {
   const [selectedHotel, setSelectedHotel] = useState("");

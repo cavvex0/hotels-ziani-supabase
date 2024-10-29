@@ -3,15 +3,15 @@
 import { useState } from "react";
 import { ReceptionSchemaType } from "../schema/hotelSchema";
 import { DashSoinShecmaType } from "../schema/soinSchema";
-import AllDataHeader from "./AllDataHeader";
+import AllDataHeader from "../components/AllDataHeader";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
-import AllDataTable from "./AllDataTable";
-import MobileAllData from "./MobileAllData";
+import AllDataTable from "../components/AllDataTable";
+import MobileAllData from "../components/MobileAllData";
 import { adminCanDelete, handlePaye } from "../actions/handleSoin";
 import toast from "react-hot-toast";
-import { Checkbox } from "./ui/checkbox";
+import { Checkbox } from "../components/ui/checkbox";
 
 type Props = {
   soins: DashSoinShecmaType[];

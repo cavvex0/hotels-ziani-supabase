@@ -1,4 +1,4 @@
-import LoginPage from "@/src/components/LoginPage";
+import LoginPage from "@/src/sections/LoginPage";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 

@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Input } from "./ui/input";
+import { Input } from "../components/ui/input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AdminSchema, AdminSchemaType } from "../schema/adminSchema";
@@ -14,7 +14,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./ui/select";
+} from "../components/ui/select";
 import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
 import { signOutAction } from "../actions/signOut";
@@ -59,11 +59,10 @@ const AdminPage = ({ users }: Props) => {
   const deleteUSer = async (id: string) => {
     deleteUser(id);
     toast.success("Utilisateur supprimé avec succès.");
-
   };
 
   return (
-    <div className="bg-white shadoww min-h-[600px] rounded-[25px]">
+    <div className="bg-white shadoww min-h-[600px] rounded-[37px]">
       <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center min-h-[600px] relative pb-9 mb-4">
         <div className="absolute top-12 left-9 hidden lg:flex items-center gap-x-3">
           <h1 className="text-4xl font-realce uppercase">créer</h1>

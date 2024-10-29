@@ -1,5 +1,5 @@
 import { MoveRightIcon } from "lucide-react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import {
   Dialog,
   DialogContent,
@@ -7,9 +7,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "./ui/dialog";
-import ConfirmDeleteAllPaye from "./confirmDelete/DeleteAllPaye";
-import ConfirmDeleteNonHotel from "./confirmDelete/DeleteNonHotel";
+} from "../ui/dialog";
+import ConfirmDeleteAllPaye from "./DeleteAllPaye";
+import ConfirmDeleteNonHotel from "./DeleteNonHotel";
 import { useState } from "react";
 
 function DeleteAll() {

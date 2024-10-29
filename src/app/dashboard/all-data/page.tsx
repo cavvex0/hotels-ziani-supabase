@@ -1,4 +1,4 @@
-import AllDataPage from "@/src/components/AllDataPage";
+import AllDataPage from "@/src/sections/AllDataPage";
 import { createClient } from "@/utils/supabase/server";
 
 const Page = async () => {
@@ -30,11 +30,7 @@ const Page = async () => {
 
   return (
     <div className="">
-      <AllDataPage
-        soins={soins}
-        hotels={hotels}
-        role={roleName}
-      />
+      <AllDataPage soins={soins} hotels={hotels} role={roleName} />
     </div>
   );
 };

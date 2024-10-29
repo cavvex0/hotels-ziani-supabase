@@ -1,5 +1,5 @@
 "use client";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "@/src/components/ui/button";
 import {
   DropdownMenu,
@@ -8,13 +8,13 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
+} from "../ui/dropdown-menu";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { getRole, getUsername } from "@/lib/getUserClient";
 import GirlImg from "@/assets/user-female.png";
 import BoyImg from "@/assets/user.png";
-import { signOutAction } from "../actions/signOut";
+import { signOutAction } from "../../actions/signOut";
 
 type Nav = {
   label: string;

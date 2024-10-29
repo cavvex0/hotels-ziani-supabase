@@ -1,18 +1,18 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Button } from "./ui/button";
-import { Checkbox } from "./ui/checkbox";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
+import { Button } from "@/src/components/ui/button";
+import { Checkbox } from "@/src/components/ui/checkbox";
+import { Input } from "@/src/components/ui/input";
+import { Label } from "@/src/components/ui/label";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SoinSchema, SoinShecmaType } from "../schema/soinSchema";
+import { SoinSchema, SoinShecmaType } from "@/src/schema/soinSchema";
 import BainSelector from "./BainSelector";
 import { useMutation } from "@tanstack/react-query";
-import { createSoin } from "../actions/createSoin";
+import { createSoin } from "@/src/actions/createSoin";
 import { getUsername } from "@/lib/getUserClient";
-import { HotelsComboBox } from "./HotelsComboBox";
-import { ReceptionSchemaType } from "../schema/hotelSchema";
+import { HotelsComboBox } from "@/src/components/HotelsComboBox";
+import { ReceptionSchemaType } from "@/src/schema/hotelSchema";
 import { ReceptionsComboBox } from "./ReceptionsComboBox";
 import toast from "react-hot-toast";
 import {
@@ -21,7 +21,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./ui/select";
+} from "@/src/components/ui/select";
 
 type Props = {
   hotelsData: ReceptionSchemaType[];

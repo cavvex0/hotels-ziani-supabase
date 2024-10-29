@@ -1,7 +1,7 @@
 import { Oswald } from "next/font/google";
 import localfont from "next/font/local";
 import "./globals.css";
-import TanstackProviders from "../providers/TanstackProvider";
+import TanstackProviders from "@/src/providers/TanstackProvider";
 import { Toaster } from "react-hot-toast";
 
 const oswald = Oswald({ subsets: ["latin"] });

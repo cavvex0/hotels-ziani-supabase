@@ -10,8 +10,6 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "../ui/button";
-import { deleteNonPaye } from "@/src/actions/deleteAll";
-import toast from "react-hot-toast";
 import { CircleXIcon } from "lucide-react";
 import { DashSoinShecmaType } from "@/src/schema/soinSchema";
 
@@ -20,12 +18,6 @@ type Props = {
   handleDelete: (id: string) => void;
 };
 const Cancel = ({ handleDelete, soin }: Props) => {
-  const handleDeleteNonHotel = async () => {
-    await deleteNonPaye();
-    toast.success(
-      "Toutes les données de non-hôtel ont été supprimées avec succès. 🎉"
-    );
-  };
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
