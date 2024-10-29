@@ -34,9 +34,13 @@ const Navbar = () => {
       label: "Admin",
       href: "/dashboard/admin",
     },
+    {
+      label: "History",
+      href: "/dashboard/history",
+    },
   ];
   if (role !== "admin") {
-    navLink.pop();
+    navLink.splice(-2);
   }
   return (
     <div className="bg-prime h-[6rem]">

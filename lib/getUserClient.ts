@@ -8,7 +8,6 @@ export const getUsername = async () => {
     data: { user },
     error,
   } = await supabaseClient.auth.getUser();
-  console.log(user)
 
   if (error) {
     console.error("Error fetching user:", error.message);
