@@ -11,10 +11,10 @@ import toast from "react-hot-toast";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import MobileDash from "./MobileDash";
 import Paye from "./confirmDelete/Paye";
+import Cancel from "./confirmDelete/Cancel";
 
 type Props = {
   soins: DashSoinShecmaType[];
-
 };
 
 const handleTaxiChange = (id: string) => {
@@ -152,13 +152,7 @@ const DashPage = ({ soins }: Props) => {
                   <Paye handlePay={handlePay} soin={soin} />
                 </div>
                 <div className="flex items-center justify-center">
-                  <Button
-                    onClick={() => handleDelete(soin.id)}
-                    size="icon"
-                    variant="cancel"
-                  >
-                    <CircleXIcon />
-                  </Button>
+                  <Cancel handleDelete={handleDelete} soin={soin} />
                 </div>
               </div>
             );
@@ -180,7 +174,9 @@ const DashPage = ({ soins }: Props) => {
               {filterEmirates && filterEmirates.length > 0 && (
                 <div>
                   Emirates :{" "}
-                  <span className="text-red-500 ml-2">{filterEmirates.length}</span>
+                  <span className="text-red-500 ml-2">
+                    {filterEmirates.length}
+                  </span>
                 </div>
               )}
             </div>

@@ -10,6 +10,7 @@ import { CircleXIcon } from "lucide-react";
 import { DashSoinShecmaType } from "../schema/soinSchema";
 import { format } from "date-fns";
 import Paye from "./confirmDelete/Paye";
+import Cancel from "./confirmDelete/Cancel";
 
 type Props = {
   soin: DashSoinShecmaType;
@@ -83,13 +84,7 @@ function MobileAllData({ soin, handlePay, role, handleDelete }: Props) {
           </div>
           {role === "admin" && (
             <div>
-              <Button
-                onClick={() => handleDelete(soin.id)}
-                size="icon"
-                variant="cancel"
-              >
-                <CircleXIcon />
-              </Button>
+              <Cancel soin={soin} handleDelete={handleDelete} />
             </div>
           )}
         </AccordionContent>

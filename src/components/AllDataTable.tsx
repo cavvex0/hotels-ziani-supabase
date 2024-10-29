@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { DashSoinShecmaType } from "../schema/soinSchema";
 import { CircleXIcon } from "lucide-react";
 import Paye from "./confirmDelete/Paye";
+import Cancel from "./confirmDelete/Cancel";
 
 type Props = {
   soin: DashSoinShecmaType;
@@ -72,13 +73,7 @@ const AllDataTable = ({ soin, role, handlePay, handleDelete }: Props) => {
       </div>
       {role === "admin" && (
         <div className="flex items-center justify-center">
-          <Button
-            onClick={() => handleDelete(soin.id)}
-            size="icon"
-            variant="cancel"
-          >
-            <CircleXIcon />
-          </Button>
+          <Cancel soin={soin} handleDelete={handleDelete} />
         </div>
       )}
     </div>
