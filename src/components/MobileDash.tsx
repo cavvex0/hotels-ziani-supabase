@@ -6,8 +6,6 @@ import {
 } from "@/components/ui/accordion";
 import { DashSoinShecmaType } from "../schema/soinSchema";
 import { cn } from "@/lib/utils";
-import { Button } from "./ui/button";
-import { CircleXIcon } from "lucide-react";
 import { format } from "date-fns";
 import { Switch } from "./ui/switch";
 import Paye from "./confirmDelete/Paye";
