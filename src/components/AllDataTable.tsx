@@ -2,8 +2,8 @@ import { format } from "date-fns";
 import { DashSoinShecmaType } from "../schema/soinSchema";
 import Paye from "./confirmDelete/Paye";
 import Cancel from "./confirmDelete/Cancel";
-import { getColorClassByUser } from "@/hooks/useColor";
 import { cn } from "@/utils/cn";
+import { getColorByUser } from "@/hooks/useColor";
 
 type Props = {
   soin: DashSoinShecmaType;
@@ -13,7 +13,7 @@ type Props = {
 };
 
 const AllDataTable = ({ soin, role, handlePay, handleDelete }: Props) => {
-  const userColorClass = getColorClassByUser(soin.user); // Use switch to determine color
+  const userColor = getColorByUser(soin.user); // Get color based on user name
 
   return (
     <div
@@ -25,9 +25,9 @@ const AllDataTable = ({ soin, role, handlePay, handleDelete }: Props) => {
       <div className="flex items-center justify-center capitalize">
         <span
           className={cn(
-            "size-6 flex items-center justify-center rounded-full text-[15px] border border-black",
-            userColorClass
+            "size-6 flex items-center justify-center rounded-full text-[15px] border border-black"
           )}
+          style={{ backgroundColor: userColor, color: "#fff" }} // Set background color and text colo
         >
           {soin.user.charAt(0)}
         </span>

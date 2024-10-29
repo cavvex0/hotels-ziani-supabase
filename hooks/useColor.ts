@@ -1,11 +1,14 @@
-// useColor.ts
-export const getColorClassByUser = (name: string) => {
-  // Explicitly list all possible classes to prevent purging
-  if (name.toLowerCase() === "adam") return "bg-red-500 text-white";
-  if (name.toLowerCase() === "yassine") return "bg-blue-500 text-white";
-  if (name.toLowerCase() === "hannan") return "bg-green-500 text-white";
-  if (name.toLowerCase() === "amine") return "bg-yellow-500";
-  if (name.toLowerCase() === "fija") return "bg-purple-500 text-white";
-  if (name.toLowerCase() === "david") return "bg-pink-500 text-white";
-  return "bg-gray-300 text-gray-500"; // Default color
-};
+// hooks/useColor.ts
+export const getColorByUser = (name: string): string => {
+    const colorMap: Record<string, string> = {
+      adam: "#ef4444", // red-500
+      yassine: "#3b82f6", // blue-500
+      hannan: "#10b981", // green-500
+      amine: "#fbbf24", // yellow-500
+      fija: "#a855f7", // purple-500
+      david: "#ec4899", // pink-500
+      default: "#d1d5db", // gray-300
+    };
+    return colorMap[name.toLowerCase()] || colorMap.default; // Return default color if not found
+  };
+  

@@ -10,7 +10,7 @@ import MobileDash from "./MobileDash";
 import Paye from "./confirmDelete/Paye";
 import Cancel from "./confirmDelete/Cancel";
 import { cn } from "@/lib/utils";
-import { getColorClassByUser } from "@/hooks/useColor";
+import { getColorByUser } from "@/hooks/useColor";
 
 type Props = {
   soins: DashSoinShecmaType[];
@@ -89,7 +89,8 @@ const DashPage = ({ soins }: Props) => {
             <div className="flex items-center justify-center">Annuler</div>
           </div>
           {filterNonEmirates.map((soin) => {
-            const userColorClass = getColorClassByUser(soin.user); // Use switch to determine color
+            const userColor = getColorByUser(soin.user); // Get color based on user name
+
             return (
               <div
                 className="grid grid-cols-12 px-4 border-b py-3 text-sm hover:bg-gray-100"
@@ -98,9 +99,9 @@ const DashPage = ({ soins }: Props) => {
                 <div className={`flex items-center justify-center capitalize `}>
                   <span
                     className={cn(
-                      "size-6 flex items-center justify-center rounded-full text-[15px] border border-black",
-                      userColorClass
+                      "size-6 flex items-center justify-center rounded-full text-[15px] border border-black"
                     )}
+                    style={{ backgroundColor: userColor, color: "#fff" }} // Set background color and text color
                   >
                     {soin.user.charAt(0)}
                   </span>
