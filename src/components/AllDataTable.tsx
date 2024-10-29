@@ -1,9 +1,9 @@
 import { format } from "date-fns";
-import { cn } from "@/lib/utils";
 import { DashSoinShecmaType } from "../schema/soinSchema";
 import Paye from "./confirmDelete/Paye";
 import Cancel from "./confirmDelete/Cancel";
 import { getColorClassByUser } from "@/hooks/useColor";
+import { cn } from "@/utils/cn";
 
 type Props = {
   soin: DashSoinShecmaType;
