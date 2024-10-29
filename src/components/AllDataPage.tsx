@@ -197,7 +197,7 @@ const AllDataPage = ({ hotels, soins, role }: Props) => {
           </div>
         </div>
       ) : (
-        <div className="flex flex-col justify-between min-h-[500px] ">
+        <div className="">
           {/* mobile */}
           {filteredRows.map((soin) => (
             <MobileAllData

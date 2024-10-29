@@ -11,6 +11,7 @@ import { CircleXIcon } from "lucide-react";
 import { format } from "date-fns";
 import { Switch } from "./ui/switch";
 import Paye from "./confirmDelete/Paye";
+import Cancel from "./confirmDelete/Cancel";
 
 type Props = {
   soin: DashSoinShecmaType;
@@ -92,13 +93,7 @@ const MobileDash = ({
               <Paye handlePay={handlePay} soin={soin} />
             </div>
             <div>
-              <Button
-                onClick={() => handleDelete(soin.id)}
-                size="icon"
-                variant="cancel"
-              >
-                <CircleXIcon />
-              </Button>
+              <Cancel handleDelete={handleDelete} soin={soin} />
             </div>
           </div>
         </AccordionContent>
