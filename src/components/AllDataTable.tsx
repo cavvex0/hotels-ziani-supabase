@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { DashSoinShecmaType } from "../schema/soinSchema";
 import Paye from "./confirmDelete/Paye";
 import Cancel from "./confirmDelete/Cancel";
+import { getColorClassByUser } from "@/hooks/useColor";
 
 type Props = {
   soin: DashSoinShecmaType;
@@ -11,8 +12,9 @@ type Props = {
   handleDelete: (id: string) => void;
 };
 
-
 const AllDataTable = ({ soin, role, handlePay, handleDelete }: Props) => {
+  const userColorClass = getColorClassByUser(soin.user); // Use switch to determine color
+
   return (
     <div
       className={cn(
@@ -21,7 +23,14 @@ const AllDataTable = ({ soin, role, handlePay, handleDelete }: Props) => {
       )}
     >
       <div className="flex items-center justify-center capitalize">
-        {soin.user.charAt(0)}
+        <span
+          className={cn(
+            "size-6 flex items-center justify-center rounded-full text-[15px] border border-black",
+            userColorClass
+          )}
+        >
+          {soin.user.charAt(0)}
+        </span>
       </div>
       <div className="flex items-center justify-center relative capitalize">
         <span className="ml-3 text-center">{soin.name}</span>

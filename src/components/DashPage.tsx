@@ -9,6 +9,8 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 import MobileDash from "./MobileDash";
 import Paye from "./confirmDelete/Paye";
 import Cancel from "./confirmDelete/Cancel";
+import { cn } from "@/lib/utils";
+import { getColorClassByUser } from "@/hooks/useColor";
 
 type Props = {
   soins: DashSoinShecmaType[];
@@ -45,6 +47,7 @@ const handleDelete = async (id: string) => {
     toast.error("Erreur inconnue");
   }
 };
+
 const DashPage = ({ soins }: Props) => {
   const isDesktop = useMediaQuery("(min-width: 1024px)");
   const filterNonEmirates = soins.filter((row) => row.hotel !== "Emirates");
@@ -86,13 +89,21 @@ const DashPage = ({ soins }: Props) => {
             <div className="flex items-center justify-center">Annuler</div>
           </div>
           {filterNonEmirates.map((soin) => {
+            const userColorClass = getColorClassByUser(soin.user); // Use switch to determine color
             return (
               <div
                 className="grid grid-cols-12 px-4 border-b py-3 text-sm hover:bg-gray-100"
                 key={soin.id}
               >
                 <div className={`flex items-center justify-center capitalize `}>
-                  {soin.user.charAt(0)}
+                  <span
+                    className={cn(
+                      "size-6 flex items-center justify-center rounded-full text-[15px] border border-black",
+                      userColorClass
+                    )}
+                  >
+                    {soin.user.charAt(0)}
+                  </span>
                 </div>
                 <div className="flex items-center justify-center capitalize">
                   {soin.name}
