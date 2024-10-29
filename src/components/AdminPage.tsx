@@ -66,10 +66,10 @@ const AdminPage = ({ users }: Props) => {
     <div className="bg-white shadoww min-h-[600px] rounded-[25px]">
       <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center min-h-[600px] relative pb-9 mb-4">
         <div className="absolute top-12 left-9 hidden lg:flex items-center gap-x-3">
-          <h1 className="text-4xl font-realce uppercase">create</h1>
-          <h1 className="text-4xl font-realce uppercase text-orange-600">or</h1>
-          <h1 className="text-4xl font-realce uppercase">delete</h1>
-          <h1 className="text-4xl font-realce uppercase">user</h1>
+          <h1 className="text-4xl font-realce uppercase">créer</h1>
+          <h1 className="text-4xl font-realce uppercase text-orange-600">ou</h1>
+          <h1 className="text-4xl font-realce uppercase">supprimer</h1>
+          <h1 className="text-4xl font-realce uppercase">utilisateur</h1>
         </div>
         <form
           onSubmit={form.handleSubmit(onSubmit)}

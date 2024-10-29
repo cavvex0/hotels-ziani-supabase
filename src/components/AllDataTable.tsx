@@ -1,8 +1,6 @@
 import { format } from "date-fns";
-import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { DashSoinShecmaType } from "../schema/soinSchema";
-import { CircleXIcon } from "lucide-react";
 import Paye from "./confirmDelete/Paye";
 import Cancel from "./confirmDelete/Cancel";
 

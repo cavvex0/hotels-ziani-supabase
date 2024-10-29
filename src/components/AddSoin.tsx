@@ -80,7 +80,7 @@ const AddSoin = ({ hotelsData }: Props) => {
     form.setValue("price", price);
   }, [bain, isTaxiPaid, form, price]);
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationKey: ["create_Soin"],
     mutationFn: createSoin,
 
@@ -197,10 +197,11 @@ const AddSoin = ({ hotelsData }: Props) => {
       </div>
       <div className="flex items-center justify-center col-span-2 lg:col-span-1 ">
         <Button
+          disabled={isPending}
           type="submit"
           className="w-full bg-green-800 hover:bg-green-900"
         >
-          Ajouter
+          {isPending ? "En cours..." : "Ajouter"}
         </Button>
       </div>
     </form>

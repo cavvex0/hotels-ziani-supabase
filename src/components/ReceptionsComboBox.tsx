@@ -13,14 +13,10 @@ import {
   CommandList,
 } from "./ui/command";
 import { Drawer, DrawerContent, DrawerTrigger } from "./ui/drawer";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "./ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 
 import { cn } from "@/lib/utils";
-import { HotelSchemaType, ReceptionSchemaType } from "../schema/hotelSchema";
+import { ReceptionSchemaType } from "../schema/hotelSchema";
 
 export function ReceptionsComboBox({
   hotelsData,

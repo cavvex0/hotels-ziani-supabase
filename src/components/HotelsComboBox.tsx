@@ -16,7 +16,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 
 import { cn } from "@/lib/utils";
 import { useMediaQuery } from "@/hooks/use-media-query";
-import { HotelSchemaType, ReceptionSchemaType } from "../schema/hotelSchema";
+import { ReceptionSchemaType } from "../schema/hotelSchema";
 
 export function HotelsComboBox({
   hotelsData,
@@ -115,7 +115,7 @@ function HotelsList({
               onSelect={(value) => {
                 const selected = hotelsData.find((h) => h.name === value);
                 setSelectedHotel(selected?.name);
-                setReceptionist('')
+                setReceptionist("");
                 setOpen(false);
               }}
             >

@@ -17,7 +17,7 @@ import {
 } from "@/src/components/ui/select";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { signInAction, signUpAction } from "../actions/authActions";
+import { signInAction } from "../actions/authActions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AuthSchema, AuthSchemaType } from "../schema/authScherma";
 import { useMutation } from "@tanstack/react-query";
