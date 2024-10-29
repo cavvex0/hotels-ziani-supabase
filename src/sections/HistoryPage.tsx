@@ -37,9 +37,9 @@ const HistoryPage = ({ history, hotels }: Props) => {
   };
   return (
     <div className="bg-white shadoww rounded-[37px] h-[600px] mb-9 overflow-hidden">
-      <div className="p-5 border-b font-realce text-3xl">Histoire</div>
-      <div className="flex h-full items-center justify-between">
-        <div className="flex-1 h-full border-r p-8 flex flex-col gap-y-4">
+      <div className="p-5 border-b font-realce text-2xl lg:text-3xl">Histoire</div>
+      <div className="flex h-full items-center justify-between flex-col lg:flex-row">
+        <div className="flex-1 h-full lg:border-r p-8 flex flex-col gap-y-4 w-full">
           <ComboHistoryHotels
             hotelsData={hotels}
             selectedHotel={selectedHotel}
@@ -56,13 +56,13 @@ const HistoryPage = ({ history, hotels }: Props) => {
           />
           <Button onClick={handleSubmit}>Filter</Button>
         </div>
-        <div className="flex-1 h-full p-4">
+        <div className="flex-1 h-full p-4 border-t lg:border-t-0">
           {
             showFilteredData && filteredHistory.length > 0
               ? filteredHistory.map((row) => (
                   <div
                     key={row.id}
-                    className="flex flex-col gap-3 font-realce text-2xl"
+                    className="flex flex-col gap-2 lg:gap-3 font-realce text-xl lg:text-2xl"
                   >
                     <div>
                       Hotel:
