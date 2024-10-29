@@ -7,7 +7,7 @@ export const getColorClassByUser = (name: string) => {
     case "hannan":
       return "bg-green-500 text-white";
     case "amine":
-      return "bg-yellow-500 text-white";
+      return "bg-yellow-500";
     case "fija":
       return "bg-purple-500 text-white";
     case "david":
