@@ -21,6 +21,25 @@ export const deleteSoin = async (id: string) => {
     };
   }
 
+  const { data: history } = await supabase
+    .from("history")
+    .select()
+    .eq("hotel", matchedUser.data.hotel)
+    .eq("reception", matchedUser.data.reception)
+    .single();
+
+  const people =
+    history?.people -
+    matchedUser.data.salam -
+    matchedUser.data.orient -
+    matchedUser.data.istanbul;
+
+  await supabase
+    .from("history")
+    .update({ people })
+    .eq("hotel", matchedUser.data.hotel)
+    .eq("reception", matchedUser.data.reception);
+
   await supabase.from("soins").delete().eq("id", id);
 
   revalidatePath("/dashboard");
