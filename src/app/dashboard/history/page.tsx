@@ -5,7 +5,10 @@ const Page = async () => {
   const supabase = createClient();
   const { data: history } = await supabase.from("history").select("*");
 
-  const {data:hotels} = await supabase.from("hotels").select("*")
+  const { data: hotels } = await supabase
+    .from("hotels")
+    .select("*")
+    .order("name", { ascending: true });
 
   if (!history || !hotels) {
     return null;
