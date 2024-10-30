@@ -51,7 +51,9 @@ const handleDelete = async (id: string) => {
 const DashPage = ({ soins }: Props) => {
   const isDesktop = useMediaQuery("(min-width: 1024px)");
   const filterNonEmirates = soins.filter((row) => row.hotel !== "Emirates");
-  const filterEmirates = soins.filter((row) => row.hotel == "Emirates");
+  const filterEmirates = soins.filter((row) => row.hotel == "Emirates").map((row)=> row.istanbul + row.orient + row.salam);
+
+  console.log(filterEmirates)
 
   const calcSalam = soins
     .filter((row) => row.price)
@@ -184,7 +186,7 @@ const DashPage = ({ soins }: Props) => {
                 <div>
                   Emirates :{" "}
                   <span className="text-red-500 ml-2">
-                    {filterEmirates.length}
+                    {filterEmirates}
                   </span>
                 </div>
               )}

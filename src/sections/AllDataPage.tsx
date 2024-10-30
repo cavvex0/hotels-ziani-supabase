@@ -32,6 +32,7 @@ const AllDataPage = ({ hotels, soins, role }: Props) => {
         format(new Date(selectedDate), "dd/MM/yyyy")
       : null
   );
+  const countEmirates = soins.filter((row) => row.hotel == "Emirates").map((row)=> row.istanbul + row.orient + row.salam);
 
   const filteredRows = soins.filter((row) => {
     const isDateMatch =
@@ -176,7 +177,7 @@ const AllDataPage = ({ hotels, soins, role }: Props) => {
                   <div>
                     Emirates :{" "}
                     <span className="text-red-500 ml-2">
-                      {filterEmirates.length}
+                      {countEmirates}
                     </span>
                   </div>
                 )}
