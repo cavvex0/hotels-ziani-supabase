@@ -1,19 +1,23 @@
 import AddSoin from "@/src/components/AddSoin";
 import DashPage from "@/src/sections/DashPage";
 import { createClient } from "@/utils/supabase/server";
+import { format } from "date-fns";
 import { redirect } from "next/navigation";
 
 const Dashboard = async () => {
   const supabase = createClient();
-  const user = await supabase.auth.getUser();
-  if (!user.data.user) {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) {
     return redirect("/login");
   }
 
   const { data: soins } = await supabase
     .from("soins")
     .select("*")
-    .order("created_at", { ascending: true });
+    .order("created_at", { ascending: true })
+    .gte("created_at", new Date().toISOString().split("T")[0]);
   const { data: hotels } = await supabase
     .from("hotels")
     .select("*")
