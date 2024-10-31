@@ -11,6 +11,7 @@ import Paye from "../components/confirmDelete/Paye";
 import Cancel from "../components/confirmDelete/Cancel";
 import { cn } from "@/lib/utils";
 import { getColorByUser } from "@/hooks/useColor";
+import Timer from "../components/Timer";
 
 type Props = {
   soins: DashSoinShecmaType[];
@@ -51,9 +52,11 @@ const handleDelete = async (id: string) => {
 const DashPage = ({ soins }: Props) => {
   const isDesktop = useMediaQuery("(min-width: 1024px)");
   const filterNonEmirates = soins.filter((row) => row.hotel !== "Emirates");
-  const filterEmirates = soins.filter((row) => row.hotel == "Emirates").map((row)=> row.istanbul + row.orient + row.salam);
+  const filterEmirates = soins
+    .filter((row) => row.hotel == "Emirates")
+    .map((row) => row.istanbul + row.orient + row.salam);
 
-  console.log(filterEmirates)
+  console.log(filterEmirates);
 
   const calcSalam = soins
     .filter((row) => row.price)
@@ -70,7 +73,10 @@ const DashPage = ({ soins }: Props) => {
 
   if (isDesktop) {
     return (
-      <div className="py-9">
+      <div className="py-9 relative">
+        <div className="absolute -top-1 right-5">
+          <Timer />
+        </div>
         <div className="bg-white min-h-[500px] rounded-[37px] shadoww border border-gray-300 relative pb-[4rem]">
           <div className="grid grid-cols-12 border-b h-14 px-4 text-[15px]">
             <div className="flex items-center justify-center ">@</div>
@@ -185,9 +191,7 @@ const DashPage = ({ soins }: Props) => {
               {filterEmirates && filterEmirates.length > 0 && (
                 <div>
                   Emirates :{" "}
-                  <span className="text-red-500 ml-2">
-                    {filterEmirates}
-                  </span>
+                  <span className="text-red-500 ml-2">{filterEmirates}</span>
                 </div>
               )}
             </div>

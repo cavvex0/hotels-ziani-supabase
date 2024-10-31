@@ -1,7 +1,6 @@
 import AddSoin from "@/src/components/AddSoin";
 import DashPage from "@/src/sections/DashPage";
 import { createClient } from "@/utils/supabase/server";
-import { format } from "date-fns";
 import { redirect } from "next/navigation";
 
 const Dashboard = async () => {
