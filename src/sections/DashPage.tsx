@@ -52,21 +52,19 @@ const handleDelete = async (id: string) => {
 const DashPage = ({ soins }: Props) => {
   const isDesktop = useMediaQuery("(min-width: 1024px)");
   const filterNonEmirates = soins.filter((row) => row.hotel !== "Emirates");
-  const filterEmirates = soins
+  const calcEmirates = soins
     .filter((row) => row.hotel == "Emirates")
-    .map((row) => row.istanbul + row.orient + row.salam);
+    .reduce((acc, curr) => acc + curr.istanbul + curr.orient + curr.salam, 0);
 
-  console.log(filterEmirates);
-
-  const calcSalam = soins
+  const calcSalam = filterNonEmirates
     .filter((row) => row.price)
     .map((soin) => soin.salam)
     .reduce((acc, curr) => acc + curr * 50, 0);
-  const calcIstanbul = soins
+  const calcIstanbul = filterNonEmirates
     .filter((row) => row.price)
     .map((soin) => soin.istanbul)
     .reduce((acc, curr) => acc + curr * 50, 0);
-  const calcOrient = soins
+  const calcOrient = filterNonEmirates
     .filter((row) => row.price)
     .map((soin) => soin.orient)
     .reduce((acc, curr) => acc + curr * 50, 0);
@@ -188,10 +186,10 @@ const DashPage = ({ soins }: Props) => {
                 <span className="mr-2 text-black">{calcOrient / 50}</span>
                 ORI : <span className="text-black">{calcOrient}</span> DH
               </p>
-              {filterEmirates && filterEmirates.length > 0 && (
+              {calcEmirates > 0 && (
                 <div>
                   Emirates :{" "}
-                  <span className="text-red-500 ml-2">{filterEmirates}</span>
+                  <span className="text-red-500 ml-2">{calcEmirates}</span>
                 </div>
               )}
             </div>
