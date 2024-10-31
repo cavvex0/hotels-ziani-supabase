@@ -22,14 +22,14 @@ const AllDataTable = ({ soin, role, handlePay, handleDelete }: Props) => {
         role === "admin" ? "grid-cols-12" : "grid-cols-11"
       )}
     >
-      <div className="flex items-center justify-center capitalize">
+      <div className={`flex items-center justify-center `}>
         <span
           className={cn(
-            "size-6 flex items-center justify-center rounded-full text-[15px] border border-black"
+            "size-6 flex items-center justify-center rounded-full text-[14px] border border-black uppercase"
           )}
-          style={{ backgroundColor: userColor, color: "#fff" }} // Set background color and text colo
+          style={{ backgroundColor: userColor, color: "#fff" }}
         >
-          {soin.user.charAt(0)}
+          {soin.user.slice(0, 2)}
         </span>
       </div>
       <div className="flex items-center justify-center relative capitalize">

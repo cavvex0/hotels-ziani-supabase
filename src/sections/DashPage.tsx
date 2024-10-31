@@ -104,14 +104,14 @@ const DashPage = ({ soins }: Props) => {
                 className="grid grid-cols-12 px-4 border-b py-3 text-sm hover:bg-gray-100"
                 key={soin.id}
               >
-                <div className={`flex items-center justify-center capitalize `}>
+                <div className={`flex items-center justify-center `}>
                   <span
                     className={cn(
-                      "size-6 flex items-center justify-center rounded-full text-[15px] border border-black"
+                      "size-6 flex items-center justify-center rounded-full text-[14px] border border-black uppercase"
                     )}
-                    style={{ backgroundColor: userColor, color: "#fff" }} // Set background color and text color
+                    style={{ backgroundColor: userColor, color: "#fff" }}
                   >
-                    {soin.user.charAt(0)}
+                    {soin.user.slice(0, 2)}
                   </span>
                 </div>
                 <div className="flex items-center justify-center capitalize">
