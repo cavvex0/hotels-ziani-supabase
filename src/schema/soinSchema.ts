@@ -23,6 +23,7 @@ export const DashSoinSchema = z.object({
   price: z.number(),
   paidBy: z.string(),
   taxi: z.boolean().default(false),
+  paid: z.boolean().default(false),
   salam: z.number().default(0),
   istanbul: z.number().default(0),
   orient: z.number().default(0),
