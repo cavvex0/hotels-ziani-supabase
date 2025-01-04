@@ -16,6 +16,7 @@ import GirlImg from "@/assets/user-female.png";
 import BoyImg from "@/assets/user.png";
 import { signOutAction } from "../../actions/signOut";
 import { getRole, getUsername } from "@/lib/getUserClient";
+import { useUserStore } from "@/stores/useUserStore";
 
 type Nav = {
   label: string;
@@ -23,30 +24,30 @@ type Nav = {
 }[];
 
 export default function UserNav({ navLink }: { navLink: Nav }) {
-  const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
-  const [username, setUsername] = useState("");
-  const [role, setRole] = useState("");
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        setLoading(true);
-        const fetchedUsername = await getUsername();
-        const fetchedRole = await getRole();
-        setUsername(fetchedUsername);
-        setRole(fetchedRole?.role);
-      } catch (error) {
-        console.error("Failed to fetch user data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const { username, loading, role } = useUserStore();
+  console.log(username);
 
-    fetchUserData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     try {
+  //       setLoading(true);
+  //       const fetchedUsername = await getUsername();
+  //       const fetchedRole = await getRole();
+  //       setUsername(fetchedUsername);
+  //       setRole(fetchedRole?.role);
+  //     } catch (error) {
+  //       console.error("Failed to fetch user data:", error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-  if (loading) {
+  //   fetchUserData();
+  // }, []);
+
+  if (loading || !role) {
     return (
       <div className="fixed inset-0 h-screen w-screen bg-prime text-white z-50 flex items-center justify-center">
         Loading...

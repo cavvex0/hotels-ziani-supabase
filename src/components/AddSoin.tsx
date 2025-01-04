@@ -22,12 +22,15 @@ import {
   SelectValue,
 } from "@/src/components/ui/select";
 import { getUsername } from "@/lib/getUserClient";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 type Props = {
   hotelsData: ReceptionSchemaType[];
 };
 
 const AddSoin = ({ hotelsData }: Props) => {
+  const user = useAuthStore((state) => state.user);
+  console.log(user);
   const [selectedHotel, setSelectedHotel] = useState("");
   const [receptionist, setReceptionist] = useState("");
   const [isTaxiPaid, setIsTaxiPaid] = useState(false);
