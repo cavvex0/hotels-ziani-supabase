@@ -16,7 +16,6 @@ import GirlImg from "@/assets/user-female.png";
 import BoyImg from "@/assets/user.png";
 import { signOutAction } from "../../actions/signOut";
 import { getRole, getUsername } from "@/lib/getUserClient";
-import { useUserStore } from "@/stores/useUserStore";
 
 type Nav = {
   label: string;
@@ -24,36 +23,36 @@ type Nav = {
 }[];
 
 export default function UserNav({ navLink }: { navLink: Nav }) {
+  const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
+  const [username, setUsername] = useState("");
+  const [role, setRole] = useState("");
 
-  const { username, loading, role } = useUserStore();
-  console.log(username);
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        setLoading(true);
+        const fetchedUsername = await getUsername();
+        const fetchedRole = await getRole();
+        setUsername(fetchedUsername);
+        setRole(fetchedRole?.role);
+      } catch (error) {
+        console.error("Failed to fetch user data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  // useEffect(() => {
-  //   const fetchUserData = async () => {
-  //     try {
-  //       setLoading(true);
-  //       const fetchedUsername = await getUsername();
-  //       const fetchedRole = await getRole();
-  //       setUsername(fetchedUsername);
-  //       setRole(fetchedRole?.role);
-  //     } catch (error) {
-  //       console.error("Failed to fetch user data:", error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
+    fetchUserData();
+  }, []);
 
-  //   fetchUserData();
-  // }, []);
-
-  // if (loading) {
-  //   return (
-  //     <div className="fixed inset-0 h-screen w-screen bg-prime text-white z-50 flex items-center justify-center">
-  //       Loading...
-  //     </div>
-  //   );
-  // }
+  if (loading) {
+    return (
+      <div className="fixed inset-0 h-screen w-screen bg-prime text-white z-50 flex items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
 
   return (
     <div className="flex gap-x-2 lg:gap-x-4 items-center">

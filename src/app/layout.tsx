@@ -3,8 +3,6 @@ import localfont from "next/font/local";
 import "./globals.css";
 import TanstackProviders from "@/src/providers/TanstackProvider";
 import { Toaster } from "react-hot-toast";
-import { AuthProvider } from "../providers/AuthProvider";
-import { UserProvider } from "../providers/UserProvider";
 
 const oswald = Oswald({ subsets: ["latin"] });
 
@@ -35,11 +33,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="text-foreground h-full">
-        <TanstackProviders>
-          <AuthProvider>
-            <UserProvider>{children}</UserProvider>
-          </AuthProvider>
-        </TanstackProviders>
+        <TanstackProviders>{children}</TanstackProviders>
         <Toaster
           toastOptions={{
             className: "text-sm",
