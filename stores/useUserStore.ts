@@ -9,59 +9,24 @@ type UserState = {
   role: string | null;
   loading: boolean;
   error: string | null;
-  fetchUsername: () => Promise<void>;
-  fetchRole: () => Promise<void>;
+  fetchUserData: () => Promise<void>;
+  initializeAuth: () => void;
 };
 
-export const useUserStore = create<UserState>((set) => ({
-  username: null,
-  role: null,
-  loading: true,
-  error: null,
+export const useUserStore = create<UserState>((set) => {
+  const supabaseClient = createClient();
 
-  // Fetch username
-  fetchUsername: async () => {
+  const fetchUserData = async () => {
     set({ loading: true, error: null });
     try {
-      const supabaseClient = createClient();
       const {
         data: { user },
-        error,
+        error: userError,
       } = await supabaseClient.auth.getUser();
 
-      if (error) {
-        console.error("Error fetching user:", error.message);
-        set({ error: error.message, loading: false });
-        return;
-      }
-
-      if (!user) {
+      if (userError || !user) {
         redirect("/");
-      }
-
-      const username = user?.user_metadata?.username || null;
-      set({ username, loading: false });
-    } catch (err) {
-      set({ error: "Failed to fetch username", loading: false });
-      console.error(err);
-    }
-  },
-
-  // Fetch role
-  fetchRole: async () => {
-    set({ loading: true, error: null });
-    try {
-      const supabaseClient = createClient();
-      const {
-        data: { user },
-        error,
-      } = await supabaseClient.auth.getUser();
-
-      if (error || !user) {
-        console.error("Error fetching user:", error?.message);
-        set({ error: error?.message || "User not found", loading: false });
-        redirect("/");
-        return;
+        throw new Error(userError?.message || "User not found");
       }
 
       const { data: roleData, error: roleError } = await supabaseClient
@@ -70,16 +35,33 @@ export const useUserStore = create<UserState>((set) => ({
         .eq("id", user.id)
         .single();
 
-      if (roleError) {
-        console.error("Error fetching role:", roleError.message);
-        set({ error: roleError.message, loading: false });
-        return;
-      }
+      if (roleError) throw new Error(roleError.message);
 
-      set({ role: roleData?.role || null, loading: false });
+      set({
+        username: user.user_metadata?.username || null,
+        role: roleData?.role || null,
+        loading: false,
+      });
     } catch (err) {
-      set({ error: "Failed to fetch role", loading: false });
+      set({ error: (err as Error).message, loading: false });
       console.error(err);
     }
-  },
-}));
+  };
+
+  return {
+    username: null,
+    role: null,
+    loading: true,
+    error: null,
+    fetchUserData,
+    initializeAuth: () => {
+      supabaseClient.auth.onAuthStateChange((event) => {
+        if (event === "SIGNED_IN") {
+          fetchUserData();
+        } else if (event === "SIGNED_OUT") {
+          set({ username: null, role: null, error: null });
+        }
+      });
+    },
+  };
+});
