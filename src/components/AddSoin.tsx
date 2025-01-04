@@ -10,7 +10,6 @@ import { SoinSchema, SoinShecmaType } from "@/src/schema/soinSchema";
 import BainSelector from "./BainSelector";
 import { useMutation } from "@tanstack/react-query";
 import { createSoin } from "@/src/actions/createSoin";
-import { getUsername } from "@/lib/getUserClient";
 import { HotelsComboBox } from "@/src/components/HotelsComboBox";
 import { ReceptionSchemaType } from "@/src/schema/hotelSchema";
 import { ReceptionsComboBox } from "./ReceptionsComboBox";
@@ -22,6 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/src/components/ui/select";
+import { useAuth } from "@/context/authContext";
 
 type Props = {
   hotelsData: ReceptionSchemaType[];
@@ -32,14 +32,11 @@ const AddSoin = ({ hotelsData }: Props) => {
   const [receptionist, setReceptionist] = useState("");
   const [isTaxiPaid, setIsTaxiPaid] = useState(false);
   const [price, setPrice] = useState<number>(0);
-  const [user, setUser] = useState("");
+  const { username: user } = useAuth();
 
-  const fetchUsername = async () => {
-    const name = await getUsername();
-    setUser(name);
-    form.setValue("user", name);
-  };
-  fetchUsername();
+  useEffect(() => {
+    if (user) form.setValue("user", user);
+  }, [user]);
   const [bain, setBain] = useState({
     salam: 0,
     istanbul: 0,
@@ -48,7 +45,7 @@ const AddSoin = ({ hotelsData }: Props) => {
   const form = useForm<SoinShecmaType>({
     resolver: zodResolver(SoinSchema),
     defaultValues: {
-      user,
+      user: user || "",
       name: "",
       hotel: "",
       reception: "",

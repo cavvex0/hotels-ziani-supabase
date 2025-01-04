@@ -10,11 +10,12 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import { getRole, getUsername } from "@/lib/getUserClient";
+import React, { useState } from "react";
+
 import GirlImg from "@/assets/user-female.png";
 import BoyImg from "@/assets/user.png";
 import { signOutAction } from "../../actions/signOut";
+import { useAuth } from "@/context/authContext";
 
 type Nav = {
   label: string;
@@ -22,23 +23,10 @@ type Nav = {
 }[];
 
 export default function UserNav({ navLink }: { navLink: Nav }) {
-  const [username, setUsername] = useState("");
-  const [role, setRole] = useState("");
+  const { loading, username, role } = useAuth();
   const [open, setOpen] = useState(false);
-  const [isReady, setIsReady] = useState(true);
 
-  const fetchUsername = async () => {
-    const name = await getUsername();
-    const role = await getRole();
-    setUsername(name);
-    setRole(role?.role);
-  };
-  useEffect(() => {
-    fetchUsername();
-    if (username) setIsReady(false);
-  }, [username]);
-
-  if (isReady) {
+  if (loading) {
     return (
       <div className="fixed inset-0 h-screen w-screen bg-prime text-white z-50 flex items-center justify-center">
         Loading...

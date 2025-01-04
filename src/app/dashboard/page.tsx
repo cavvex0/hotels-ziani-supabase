@@ -22,18 +22,12 @@ const Dashboard = async () => {
     .select("*")
     .order("name", { ascending: true });
 
-  if (!soins) {
+  if (!hotels || !soins) {
     return (
-      <div className="py-9">
-        <div className="bg-white min-h-[500px] rounded-[37px] shadoww border border-gray-300 relative pb-[4rem] flex items-center justify-center">
-          Loading...
-        </div>
+      <div className="fixed inset-0 h-screen w-screen bg-prime text-white z-50 flex items-center justify-center">
+        Loading...
       </div>
     );
-  }
-
-  if (!hotels) {
-    return null;
   }
 
   return (

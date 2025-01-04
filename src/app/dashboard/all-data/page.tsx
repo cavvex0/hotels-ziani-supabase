@@ -25,7 +25,11 @@ const Page = async () => {
     .order("name", { ascending: true });
 
   if (!soins || !hotels) {
-    return null;
+    return (
+      <div className="fixed inset-0 h-screen w-screen bg-prime text-white z-50 flex items-center justify-center">
+        Loading...
+      </div>
+    );
   }
 
   return (
