@@ -25,7 +25,6 @@ const AllDataPage = ({ hotels, soins, role }: Props) => {
   const [receptionist, setReceptionist] = useState("");
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [showpaidCheck, setShowpaidCheck] = useState(false);
-  const [showNonpaidCheck, setShowNonpaidCheck] = useState(false);
 
   const filterEmirates = soins.filter((row) =>
     row.hotel === "Emirates" && selectedDate
@@ -34,7 +33,7 @@ const AllDataPage = ({ hotels, soins, role }: Props) => {
       : null
   );
   const countEmirates = filterEmirates
-    .filter((row) => row.hotel === "Emirates")
+    .filter((row) => row.hotel == "Emirates")
     .map((row) => row.istanbul + row.orient + row.salam)
     .reduce((acc, curr) => acc + curr, 0);
 
@@ -50,9 +49,8 @@ const AllDataPage = ({ hotels, soins, role }: Props) => {
 
     const isReceptionistMatch = !receptionist || row.reception === receptionist;
     const isPaidMatch = !showpaidCheck || row.paidBy;
-    const isNonPaidMatch = !showNonpaidCheck || !row.paid;
 
-    return isDateMatch && isHotelMatch && isReceptionistMatch && isPaidMatch && isNonPaidMatch;
+    return isDateMatch && isHotelMatch && isReceptionistMatch && isPaidMatch;
   });
 
   const totalPayé = filteredRows
@@ -108,45 +106,21 @@ const AllDataPage = ({ hotels, soins, role }: Props) => {
           hotels={hotels}
         />
       </div>
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-x-4">
-          <Checkbox
-            id="terms1"
-            checked={showNonpaidCheck}
-            onCheckedChange={() => {
-              setShowpaidCheck(false);
-              setShowNonpaidCheck(!showNonpaidCheck);
-              showNonpaidCheck
-                ? setSelectedDate(new Date())
-                : setSelectedDate(null);
-            }}
-          />
-          <label
-            htmlFor="terms1"
-            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
-          >
-            Afficher tout non payant
-          </label>
-        </div>
-        <div className="flex items-center gap-x-4">
-          <Checkbox
-            id="terms2"
-            checked={showpaidCheck}
-            onCheckedChange={() => {
-              setShowNonpaidCheck(false);
-              setShowpaidCheck(!showpaidCheck);
-              showpaidCheck
-                ? setSelectedDate(new Date())
-                : setSelectedDate(null);
-            }}
-          />
-          <label
-            htmlFor="terms2"
-            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
-          >
-            Afficher tout payant
-          </label>
-        </div>
+      <div className="flex items-center justify-end space-x-2">
+        <Checkbox
+          id="terms2"
+          checked={showpaidCheck}
+          onCheckedChange={() => {
+            setShowpaidCheck(!showpaidCheck);
+            showpaidCheck ? setSelectedDate(new Date()) : setSelectedDate(null);
+          }}
+        />
+        <label
+          htmlFor="terms2"
+          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+        >
+          Afficher tout Payant
+        </label>
       </div>
       {isDesktop ? (
         <div className="pb-9 hidden lg:block">

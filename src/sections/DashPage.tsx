@@ -53,7 +53,7 @@ const DashPage = ({ soins }: Props) => {
   const isDesktop = useMediaQuery("(min-width: 1024px)");
   const filterNonEmirates = soins.filter((row) => row.hotel !== "Emirates");
   const calcEmirates = soins
-    .filter((row) => row.hotel === "Emirates")
+    .filter((row) => row.hotel == "Emirates")
     .reduce((acc, curr) => acc + curr.istanbul + curr.orient + curr.salam, 0);
 
   const calcSalam = filterNonEmirates
