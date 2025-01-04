@@ -47,13 +47,13 @@ export default function UserNav({ navLink }: { navLink: Nav }) {
   //   fetchUserData();
   // }, []);
 
-  if (loading) {
-    return (
-      <div className="fixed inset-0 h-screen w-screen bg-prime text-white z-50 flex items-center justify-center">
-        Loading...
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="fixed inset-0 h-screen w-screen bg-prime text-white z-50 flex items-center justify-center">
+  //       Loading...
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="flex gap-x-2 lg:gap-x-4 items-center">
