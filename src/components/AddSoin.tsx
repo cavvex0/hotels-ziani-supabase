@@ -21,7 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/src/components/ui/select";
-import { useAuth } from "@/context/authContext";
+import { getUsername } from "@/lib/getUserClient";
 
 type Props = {
   hotelsData: ReceptionSchemaType[];
@@ -31,12 +31,17 @@ const AddSoin = ({ hotelsData }: Props) => {
   const [selectedHotel, setSelectedHotel] = useState("");
   const [receptionist, setReceptionist] = useState("");
   const [isTaxiPaid, setIsTaxiPaid] = useState(false);
+  const [username, setUsername] = useState("");
   const [price, setPrice] = useState<number>(0);
-  const { username: user } = useAuth();
+  const fetchUsername = async () => {
+    const user = await getUsername();
+    if (user) {
+      setUsername(user);
+      form.setValue("user", user);
+    }
+  };
+  fetchUsername();
 
-  useEffect(() => {
-    if (user) form.setValue("user", user);
-  }, [user]);
   const [bain, setBain] = useState({
     salam: 0,
     istanbul: 0,
@@ -45,7 +50,7 @@ const AddSoin = ({ hotelsData }: Props) => {
   const form = useForm<SoinShecmaType>({
     resolver: zodResolver(SoinSchema),
     defaultValues: {
-      user: user || "",
+      user: username,
       name: "",
       hotel: "",
       reception: "",
