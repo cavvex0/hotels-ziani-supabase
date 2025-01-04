@@ -23,7 +23,7 @@ type Nav = {
 }[];
 
 export default function UserNav({ navLink }: { navLink: Nav }) {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const [username, setUsername] = useState("");
   const [role, setRole] = useState("");
