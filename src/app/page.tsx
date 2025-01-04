@@ -3,7 +3,7 @@ import { useAuth } from "@/context/authContext";
 import { redirect } from "next/navigation";
 
 export default function Index() {
-  const { user, loading } = useAuth();
+  const { user, loading, username } = useAuth();
 
   if (loading) {
     return (
@@ -12,7 +12,7 @@ export default function Index() {
       </div>
     );
   }
-  if (!user) {
+  if (!user || !username) {
     return redirect("/login");
   }
 
